@@ -8,7 +8,7 @@
 //import SwiftUI
 //import CodeScanner
 //
-//struct QRCodeView: View {
+//struct QRCodeAndCameraView: View {
 //    
 //    @Environment(\.dismiss) var dismiss
 //    @ObservedObject var vm = ViewModel()
@@ -326,5 +326,5 @@
 //}
 //
 //#Preview {
-//    QRCodeView()
+//    QRCodeAndCameraView()
 //}
