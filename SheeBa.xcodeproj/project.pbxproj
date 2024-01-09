@@ -72,7 +72,7 @@
 		FD1161E62B46904D000B0064 /* CreateNewMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1161E52B46904D000B0064 /* CreateNewMessageView.swift */; };
 		FD1161E82B46936D000B0064 /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1161E72B46936D000B0064 /* ChatLogView.swift */; };
 		FD1161EA2B46937D000B0064 /* SendPayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1161E92B46937D000B0064 /* SendPayView.swift */; };
-		FD1161EC2B46938C000B0064 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1161EB2B46938C000B0064 /* QRCodeView.swift */; };
+		FD1161EC2B46938C000B0064 /* QRCodeAndCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1161EB2B46938C000B0064 /* QRCodeAndCameraView.swift */; };
 		FD1161EE2B4693A6000B0064 /* GetPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1161ED2B4693A6000B0064 /* GetPointView.swift */; };
 		FD1161F02B4693B6000B0064 /* StoreQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1161EF2B4693B6000B0064 /* StoreQRCodeView.swift */; };
 		FD1161F22B4693C9000B0064 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1161F12B4693C9000B0064 /* CameraView.swift */; };
@@ -87,6 +87,7 @@
 		FD1162042B4694AD000B0064 /* Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1162032B4694AD000B0064 /* Indicator.swift */; };
 		FD1BFDD92B4A7E780049CC53 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1BFDD82B4A7E780049CC53 /* UIViewExtension.swift */; };
 		FD1BFDDB2B4A7FF70049CC53 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1BFDDA2B4A7FF70049CC53 /* ActivityView.swift */; };
+		FD3E68792B4D616200436F0A /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3E68782B4D616200436F0A /* QRCodeView.swift */; };
 		FD4122B82B46C46C0050F0BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD4122B72B46C46B0050F0BC /* GoogleService-Info.plist */; };
 		FD4122BB2B47BA9D0050F0BC /* MailCompose.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4122BA2B47BA9D0050F0BC /* MailCompose.swift */; };
 		FD4122BE2B47C6CD0050F0BC /* SetUpPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4122BD2B47C6CD0050F0BC /* SetUpPhoneView.swift */; };
@@ -135,7 +136,7 @@
 		FD1161E52B46904D000B0064 /* CreateNewMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMessageView.swift; sourceTree = "<group>"; };
 		FD1161E72B46936D000B0064 /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
 		FD1161E92B46937D000B0064 /* SendPayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPayView.swift; sourceTree = "<group>"; };
-		FD1161EB2B46938C000B0064 /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
+		FD1161EB2B46938C000B0064 /* QRCodeAndCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeAndCameraView.swift; sourceTree = "<group>"; };
 		FD1161ED2B4693A6000B0064 /* GetPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPointView.swift; sourceTree = "<group>"; };
 		FD1161EF2B4693B6000B0064 /* StoreQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreQRCodeView.swift; sourceTree = "<group>"; };
 		FD1161F12B4693C9000B0064 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -150,6 +151,7 @@
 		FD1162032B4694AD000B0064 /* Indicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Indicator.swift; sourceTree = "<group>"; };
 		FD1BFDD82B4A7E780049CC53 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		FD1BFDDA2B4A7FF70049CC53 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		FD3E68782B4D616200436F0A /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		FD4122B72B46C46B0050F0BC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FD4122B92B46CC590050F0BC /* SheeBa.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SheeBa.entitlements; sourceTree = "<group>"; };
 		FD4122BA2B47BA9D0050F0BC /* MailCompose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailCompose.swift; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				FD1161E92B46937D000B0064 /* SendPayView.swift */,
 				FD1161ED2B4693A6000B0064 /* GetPointView.swift */,
 				FD058BC22B468C7400D4F467 /* StoreViews */,
+				FD3E68772B4D610F00436F0A /* OwnerViews */,
 			);
 			path = HomeViews;
 			sourceTree = "<group>";
@@ -406,6 +409,14 @@
 			path = StoreViews;
 			sourceTree = "<group>";
 		};
+		FD3E68772B4D610F00436F0A /* OwnerViews */ = {
+			isa = PBXGroup;
+			children = (
+				FD3E68782B4D616200436F0A /* QRCodeView.swift */,
+			);
+			path = OwnerViews;
+			sourceTree = "<group>";
+		};
 		FD4122BC2B47C2720050F0BC /* Trash */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,7 +425,7 @@
 				FD4122BF2B47C8E90050F0BC /* SMSAuthView.swift */,
 				FD1161D92B468FD4000B0064 /* SetUpPasswordView.swift */,
 				FD1161DF2B469007000B0064 /* ResetPasswordView.swift */,
-				FD1161EB2B46938C000B0064 /* QRCodeView.swift */,
+				FD1161EB2B46938C000B0064 /* QRCodeAndCameraView.swift */,
 			);
 			path = Trash;
 			sourceTree = "<group>";
@@ -552,7 +563,7 @@
 				FD1161D42B468F9E000B0064 /* EntryView.swift in Sources */,
 				FD058C172B468E7000D4F467 /* ViewModel.swift in Sources */,
 				FD058C112B468E1A00D4F467 /* DestructiveAlertModifier.swift in Sources */,
-				FD1161EC2B46938C000B0064 /* QRCodeView.swift in Sources */,
+				FD1161EC2B46938C000B0064 /* QRCodeAndCameraView.swift in Sources */,
 				FD058C1F2B468EE400D4F467 /* ChatMessage.swift in Sources */,
 				FD058C032B468D7C00D4F467 /* BackButtonModifier.swift in Sources */,
 				FD4122C22B4823920050F0BC /* ConfirmEmailView.swift in Sources */,
@@ -578,6 +589,7 @@
 				FD058C252B468F1000D4F467 /* StorePoint.swift in Sources */,
 				FD1161E02B469007000B0064 /* ResetPasswordView.swift in Sources */,
 				FD1161F82B4693FE000B0064 /* UserAttributeView.swift in Sources */,
+				FD3E68792B4D616200436F0A /* QRCodeView.swift in Sources */,
 				FD4122BE2B47C6CD0050F0BC /* SetUpPhoneView.swift in Sources */,
 				FD1161E42B46903A000B0064 /* MoneyTransferView.swift in Sources */,
 				FD058C132B468E3B00D4F467 /* UIImageExtension.swift in Sources */,

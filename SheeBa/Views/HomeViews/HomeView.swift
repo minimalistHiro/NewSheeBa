@@ -34,8 +34,7 @@ struct HomeView: View {
                     LazyVStack {
                         cardView
                             .padding(.top, 10)
-                        // TODO: - 第2弾
-//                        buttons
+                        menuButtons
                     }
                 }
                 // TODO: - 第2弾
@@ -86,15 +85,15 @@ struct HomeView: View {
                 vm.isNavigateNotConfirmEmailView = true
             }
         })
-//        .fullScreenCover(isPresented: $isUserCurrentryLoggedOut) {
-//            EntryView {
-//                isUserCurrentryLoggedOut = false
-//                vm.fetchCurrentUser()
-//                vm.fetchRecentMessages()
-//                vm.fetchFriends()
-//                vm.fetchStorePoints()
-//            }
-//        }
+        .fullScreenCover(isPresented: $isUserCurrentryLoggedOut) {
+            EntryView {
+                isUserCurrentryLoggedOut = false
+                vm.fetchCurrentUser()
+                vm.fetchRecentMessages()
+                vm.fetchFriends()
+                vm.fetchStorePoints()
+            }
+        }
         // TODO: - fullScrrenCover同士がバッティングするとうまく表示されない。
 //        .fullScreenCover(isPresented: $isShowQRCodeView) {
 //            QRCodeView()
@@ -167,20 +166,26 @@ struct HomeView: View {
     }
     
     // MARK: - buttons
-    private var buttons: some View {
+    private var menuButtons: some View {
         HStack {
-            NavigationLink {
-                MoneyTransferView()
-            } label: {
-                VStack {
-                    Image(systemName: "yensign.circle")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 30)
-                    Text("送る")
+            // QRコードボタン
+            if let currentUser = vm.currentUser, currentUser.isOwner {
+                NavigationLink {
+                    QRCodeView()
+                } label: {
+                    MenuButton(imageSystemName: "qrcode", text: "QRコード")
                 }
+                .foregroundColor(.black)
             }
-            .foregroundColor(.black)
+            
+            // TODO: - 第二弾
+            // 送るボタン
+//            NavigationLink {
+//                MoneyTransferView()
+//            } label: {
+//                MenuButton(imageSystemName: "yensign.circle", text: "送る")
+//            }
+//            .foregroundColor(.black)
         }
     }
     
@@ -199,6 +204,25 @@ struct HomeView: View {
             }
         }
         .padding(.bottom)
+    }
+    
+    // MARK: - MenuButton
+    struct MenuButton: View {
+        let imageSystemName: String
+        let text: String
+        
+        var body: some View {
+            VStack {
+                Image(systemName: imageSystemName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30)
+                    .padding(.bottom, 7)
+                Text(text)
+                    .font(.caption)
+            }
+            .padding()
+        }
     }
     
     // MARK: - サインアウト
