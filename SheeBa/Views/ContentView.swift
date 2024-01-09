@@ -25,39 +25,43 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            TabView {
+            TabView(selection: $selectedTab) {
                 HomeView(isUserCurrentryLoggedOut: $isUserCurrentryLoggedOut)
                     .tabItem {
-                        VStack {
-                            Image(systemName: "house")
-                        }
+                        Label("ホーム", systemImage: "house")
                     }
                     .tag(1)
                 CameraView(isUserCurrentryLoggedOut: $isUserCurrentryLoggedOut)
-                    .tabItem {
-                        VStack {
-                            Image(systemName: "camera")
-                        }
-                    }
                     .tag(2)
                 AccountView(isUserCurrentryLoggedOut: $isUserCurrentryLoggedOut)
                     .tabItem {
-                        VStack {
-                            Image(systemName: "person.fill")
-                        }
+                        Label("アカウント", systemImage: "person.fill")
                     }
                     .tag(3)
             }
+            .padding(.bottom, 5)
             .overlay {
                 VStack {
                     Spacer()
                     Button {
-                        
+                        selectedTab = 2
                     } label: {
-                        VStack {
-                            Circle()
-                        }
+                        Circle()
+                            .frame(width: 60)
+                            .overlay {
+                                VStack {
+                                    Image(systemName: "qrcode.viewfinder")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 25)
+                                    Text("スキャン")
+                                        .font(.caption2)
+                                        .bold()
+                                }
+                                .foregroundStyle(.white)
+                            }
                     }
+                    .padding(.bottom, 7)
                 }
             }
         }

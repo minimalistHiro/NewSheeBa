@@ -121,7 +121,6 @@ struct UserAttributeView: View {
             
             documentsSnapshot?.documents.forEach({ snapshot in
                 let data = snapshot.data()
-                let user = ChatUser(data: data)
                 // 自分含めてた全てのユーザーを追加する。
                 self.allUsers.append(.init(data: data))
             })
