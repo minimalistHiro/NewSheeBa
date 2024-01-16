@@ -26,6 +26,7 @@ struct EntryView: View {
                 
                 Text("SheeBa")
                     .font(.system(size: 50))
+                    .bold()
                 
                 Spacer()
                 
@@ -52,6 +53,7 @@ struct EntryView: View {
                 
                 Spacer()
             }
+//            .background(Color(String.sheeba))
         }
         .onAppear {
             isShowTutorialView = true

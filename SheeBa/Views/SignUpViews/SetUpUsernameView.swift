@@ -83,6 +83,7 @@ struct SetUpUsernameView: View {
             .overlay {
                 ScaleEffectIndicator(onIndicator: $vm.onIndicator)
             }
+//            .background(Color(String.sheeba))
         }
         .fullScreenCover(isPresented: $isShowImagePicker) {
             ImagePicker(selectedImage: $image)

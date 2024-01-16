@@ -333,12 +333,13 @@ final class ViewModel: ObservableObject {
     /// - Parameters:
     ///   - email: メールアドレス
     ///   - password: パスワード
+    ///   - password2: パスワード（確認用）
     ///   - username: ユーザー名
     ///   - age: 年齢
     ///   - address: 住所
     ///   - image: トップ画像
     /// - Returns: なし
-    func createNewAccount(email: String, password: String, username: String, age: String, address: String, image: UIImage?) {
+    func createNewAccount(email: String, password: String, password2: String, username: String, age: String, address: String, image: UIImage?) {
         onIndicator = true
         // メールアドレス、パスワードどちらかが空白の場合、エラーを出す。
         if email.isEmpty || password.isEmpty {
@@ -346,6 +347,11 @@ final class ViewModel: ObservableObject {
             return
         }
         
+        // 2つのパスワードが一致しない場合、エラーを出す。
+        if password != password2 {
+            self.handleError(String.mismatchPassword, error: nil)
+            return
+        }
         // パスワードの文字数が足りない時にエラーを発動。
 //        if password.count < Setting.minPasswordOfDigits {
 //            self.isShowPasswordOfDigitsError = true
@@ -606,6 +612,7 @@ final class ViewModel: ObservableObject {
     /// エラー処理
     /// - Parameters:
     ///   - errorMessage: エラーメッセージ
+    ///   - error: エラー
     /// - Returns: なし
     func handleError(_ errorMessage: String, error: Error?) {
         self.onIndicator = false
@@ -634,8 +641,10 @@ final class ViewModel: ObservableObject {
     /// ユーザー情報を保存
     /// - Parameters:
     ///   - email: メールアドレス
-    ///   - password: パスワード
-    ///   - imageProfileUrl: 画像URL
+    ///   - username: ユーザー名
+    ///   - age: 年代
+    ///   - address: 住所
+    ///   - profileImageUrl: 画像URL
     /// - Returns: なし
     func persistUser(email: String, username: String, age: String, address: String, profileImageUrl: URL?) {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
@@ -672,7 +681,9 @@ final class ViewModel: ObservableObject {
     /// 画像を保存
     /// - Parameters:
     ///   - email: メールアドレス
-    ///   - password: パスワード
+    ///   - username: ユーザー名
+    ///   - age: 年代
+    ///   - address: 住所
     ///   - image: トップ画像
     /// - Returns: なし
     func persistImage(email: String, username: String, age: String, address: String, image: UIImage?) {

@@ -13,12 +13,13 @@ extension String {
     static let highlight = "Highlight"
     static let caution = "Caution"
     static let chatLogBackground = "ChatLogBackground"
+    static let sheeba = "SheeBa"
     
     // Tutorial
     static func tutorialText(page: Int) -> String {
         switch page {
         case 1:
-            return "しば通貨アプリを\nダウンロードしていただき\nありがとうございます"
+            return "SheeBaを\nダウンロードしていただき\nありがとうございます"
         case 2:
             return "各店舗にあるQRコードを読み取って\nポイントを貯めることができます"
         case 3:
@@ -37,6 +38,7 @@ extension String {
     static let emptyEmailOrPassword = "メールアドレス、パスワードを入力してください。"
     static let invalidEmail = "メールアドレスの形式が正しくありません。"
     static let weakPassword = "パスワードは6文字以上で設定してください。"
+    static let mismatchPassword = "パスワードとパスワード（確認用）が一致しません。"
     static let emailAlreadyInUse = "このメールアドレスはすでに登録されています。"
     static let userNotFound = "メールアドレス、またはパスワードが間違っています。"
     static let wrongEmail = "メールアドレスが間違っています。"

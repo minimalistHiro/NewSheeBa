@@ -42,6 +42,7 @@ struct TutorialView: View {
                     .padding(.horizontal)
                 }
             }
+//            .background(Color(String.sheeba))
         }
     }
 }

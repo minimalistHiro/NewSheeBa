@@ -38,9 +38,9 @@ struct HomeView: View {
                     }
                 }
                 // TODO: - 第2弾
-//                .overlay {
-//                    qrCodeButton
-//                }
+                //                .overlay {
+                //                    qrCodeButton
+                //                }
             }
         }
         .onAppear {

@@ -29,34 +29,39 @@ struct AccountView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                // トップ画像
-                NavigationLink {
-                    UpdateImageView()
-                } label: {
-                    if let image = vm.currentUser?.profileImageUrl, image != "" {
-                        Icon.CustomWebImage(imageSize: .large, image: image)
-                            .overlay {
-                                Icon.CustomImageChangeCircle(imageSize: .large)
-                            }
-                            .padding(.top, 20)
-                    } else {
-                        Icon.CustomCircle(imageSize: .large)
-                            .overlay {
-                                Icon.CustomImageChangeCircle(imageSize: .large)
-                            }
-                            .padding(.top, 20)
+            ZStack {
+//                Color(String.sheeba)
+//                    .ignoresSafeArea()
+                
+                VStack {
+                    // トップ画像
+                    NavigationLink {
+                        UpdateImageView()
+                    } label: {
+                        if let image = vm.currentUser?.profileImageUrl, image != "" {
+                            Icon.CustomWebImage(imageSize: .large, image: image)
+                                .overlay {
+                                    Icon.CustomImageChangeCircle(imageSize: .large)
+                                }
+                                .padding(.top, 20)
+                        } else {
+                            Icon.CustomCircle(imageSize: .large)
+                                .overlay {
+                                    Icon.CustomImageChangeCircle(imageSize: .large)
+                                }
+                                .padding(.top, 20)
+                        }
                     }
+                    
+                    Text(vm.currentUser?.username ?? "しば太郎")
+                        .font(.title3)
+                        .bold()
+                        .padding()
+                    
+                    Text("しばID : " + (vm.currentUser?.id ?? ""))
+                        .font(.caption)
+                        .padding(.bottom, 60)
                 }
-                
-                Text(vm.currentUser?.username ?? "しば太郎")
-                    .font(.title3)
-                    .bold()
-                    .padding()
-                
-                Text("しばID : " + (vm.currentUser?.id ?? ""))
-                    .font(.caption)
-                    .padding(.bottom, 60)
             }
             
             Text("設定")

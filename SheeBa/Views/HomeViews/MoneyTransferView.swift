@@ -30,6 +30,7 @@ struct MoneyTransferView: View {
                 CustomTabBar(tab: $tab, buttonTab: .friend)
             }
             .foregroundStyle(.black)
+            .background(Color(String.sheeba))
             
             VStack {
                 switch tab {
