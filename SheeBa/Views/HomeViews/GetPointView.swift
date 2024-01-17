@@ -35,7 +35,7 @@ struct GetPointView: View {
                 Spacer()
                 
                 if isSameStoreScanError {
-                    Text("このQRコードは後日0時に有効になります。")
+                    Text("1店舗につき1日1回のみポイントが貰えます。")
                         .bold()
                         .padding()
                 } else {

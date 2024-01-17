@@ -38,7 +38,7 @@ struct UpdateUsernameView: View {
                 Button {
                     updateUsername(username: editText)
                 } label: {
-                    CustomCapsule(text: "確定", imageSystemName: nil, foregroundColor: disabled ? .gray : .black, textColor: .white, isStroke: false)
+                    CustomCapsule(text: "ユーザー名を変更", imageSystemName: nil, foregroundColor: disabled ? .gray : .black, textColor: .white, isStroke: false)
                 }
                 .disabled(disabled)
                 
