@@ -91,6 +91,7 @@ struct SetUpEmailView: View {
             .navigationDestination(isPresented: $vm.isNavigateConfirmEmailView) {
                 ConfirmEmailView(email: $email, password: $password, didCompleteLoginProcess: didCompleteLoginProcess)
             }
+            .background(Color(String.yellow))
         }
 //        .onOpenURL { url in
 //            email = UserDefaults.standard.value(forKey: "Email") as? String ?? ""

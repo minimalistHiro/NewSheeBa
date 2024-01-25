@@ -152,7 +152,7 @@ struct AccountView: View {
             //            DispatchQueue.main.async {
             //                isShowConfirmationWithdrawalAlert = false
             //            }
-            //            isShowSuccessWithdrawalAlert = true
+//                        isShowSuccessWithdrawalAlert = true
         })
         .asSingleAlert(title: "",
                        isShowAlert: $isShowSuccessWithdrawalAlert,

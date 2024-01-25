@@ -15,34 +15,37 @@ struct TutorialView: View {
     
     var body: some View {
         NavigationStack {
-            TabView(selection: $selectedTab) {
-                ForEach(pages, id: \.self) { page in
-                    Tutorial(text: String.tutorialText(page: page),
-                             lastPage: pages.count,
-                             selectedTab: $selectedTab,
-                             didAction: didCompleteTutorialProcess)
+            ZStack {
+                Color(String.yellow).ignoresSafeArea(edges: .all)
+                
+                TabView(selection: $selectedTab) {
+                    ForEach(pages, id: \.self) { page in
+                        Tutorial(text: String.tutorialText(page: page),
+                                 lastPage: pages.count,
+                                 selectedTab: $selectedTab,
+                                 didAction: didCompleteTutorialProcess)
+                    }
                 }
-            }
-            .tabViewStyle(PageTabViewStyle())
-            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-            .animation(.easeInOut, value: selectedTab)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    HStack {
-                        Spacer()
-                        if selectedTab != pages.endIndex {
-                            Button {
-                                didCompleteTutorialProcess()
-                            } label: {
-                                Text("スキップ")
+                .tabViewStyle(PageTabViewStyle())
+                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+                .animation(.easeInOut, value: selectedTab)
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        HStack {
+                            Spacer()
+                            if selectedTab != pages.endIndex {
+                                Button {
+                                    didCompleteTutorialProcess()
+                                } label: {
+                                    Text("スキップ")
+                                }
                             }
                         }
+                        .foregroundStyle(.black)
+                        .padding(.horizontal)
                     }
-                    .foregroundStyle(.black)
-                    .padding(.horizontal)
                 }
             }
-//            .background(Color(String.sheeba))
         }
     }
 }

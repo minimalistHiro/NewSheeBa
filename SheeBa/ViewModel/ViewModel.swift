@@ -54,14 +54,19 @@ final class ViewModel: ObservableObject {
     func fetchCurrentUser() {
         onIndicator = true
         
-        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
+        guard let user = FirebaseManager.shared.auth.currentUser else {
             self.handleError(String.failureFetchUID, error: nil)
             return
         }
         
+//        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
+//            self.handleError(String.failureFetchUID, error: nil)
+//            return
+//        }
+        
         FirebaseManager.shared.firestore
             .collection(FirebaseConstants.users)
-            .document(uid)
+            .document(user.uid)
             .getDocument { snapshot, error in
                 self.handleNetworkError(error: error, errorMessage: String.failureFetchUser)
                 
@@ -78,9 +83,14 @@ final class ViewModel: ObservableObject {
                 }
                 
                 // メールアドレス未認証の場合のエラー
-                if !currentUser.isConfirmEmail && !currentUser.isStore {
+//                if !currentUser.isConfirmEmail && !currentUser.isStore {
+//                    self.isShowNotConfirmEmailError = true
+//                    try? FirebaseManager.shared.auth.signOut()
+//                }
+                if !user.isEmailVerified {
                     self.isShowNotConfirmEmailError = true
                     try? FirebaseManager.shared.auth.signOut()
+                    return
                 }
                 
                 // 初回特典アラート表示

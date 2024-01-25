@@ -20,40 +20,44 @@ struct EntryView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                Spacer()
-                Spacer()
+            ZStack {
+                Color(String.yellow).ignoresSafeArea(edges: .all)
                 
-                Text("SheeBa")
-                    .font(.system(size: 50))
-                    .bold()
-                
-                Spacer()
-                
-                NavigationLink {
-                    SetUpUsernameView(didCompleteLoginProcess: self.didCompleteLoginProcess)
-                } label: {
-                    CustomCapsule(text: "アカウントを作成する",
-                                  imageSystemName: nil,
-                                  foregroundColor: .white,
-                                  textColor: .black,
-                                  isStroke: true)
+                VStack {
+                    Spacer()
+                    Spacer()
+                    
+                    Image("Title")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 250)
+                    
+                    Spacer()
+                    
+                    NavigationLink {
+                        SetUpUsernameView(didCompleteLoginProcess: self.didCompleteLoginProcess)
+                    } label: {
+                        CustomCapsule(text: "アカウントを作成する",
+                                      imageSystemName: nil,
+                                      foregroundColor: .white,
+                                      textColor: .black,
+                                      isStroke: true)
+                    }
+                    .padding(.bottom)
+                    
+                    NavigationLink {
+                        LoginView(didCompleteLoginProcess: self.didCompleteLoginProcess)
+                    } label: {
+                        CustomCapsule(text: "ログイン",
+                                      imageSystemName: nil,
+                                      foregroundColor: .black,
+                                      textColor: .white,
+                                      isStroke: false)
+                    }
+                    
+                    Spacer()
                 }
-                .padding(.bottom)
-                
-                NavigationLink {
-                    LoginView(didCompleteLoginProcess: self.didCompleteLoginProcess)
-                } label: {
-                    CustomCapsule(text: "ログイン",
-                                  imageSystemName: nil,
-                                  foregroundColor: .black,
-                                  textColor: .white,
-                                  isStroke: false)
-                }
-                
-                Spacer()
             }
-//            .background(Color(String.sheeba))
         }
         .onAppear {
             isShowTutorialView = true

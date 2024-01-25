@@ -108,7 +108,7 @@ struct HomeView: View {
     // MARK: - cardView
     private var cardView: some View {
         Rectangle()
-            .foregroundColor(.white)
+            .foregroundColor(Color(String.yellow))
             .frame(width: 300, height: 200)
             .cornerRadius(20)
             .shadow(radius: 7, x: 0, y: 0)

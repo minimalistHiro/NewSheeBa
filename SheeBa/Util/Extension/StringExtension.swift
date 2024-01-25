@@ -13,7 +13,10 @@ extension String {
     static let highlight = "Highlight"
     static let caution = "Caution"
     static let chatLogBackground = "ChatLogBackground"
-    static let sheeba = "SheeBa"
+    static let yellow = "Yellow"
+    static let green = "Green"
+    static let darkGreen = "DarkGreen"
+    static let brown = "Brown"
     
     // Tutorial
     static func tutorialText(page: Int) -> String {

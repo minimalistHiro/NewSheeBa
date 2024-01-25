@@ -13,6 +13,8 @@ struct NotConfirmEmailView: View {
     @ObservedObject var vm: ViewModel
     let didCompleteLoginProcess: () -> ()
     @State private var isShowPassword = false           // パスワード表示有無
+    @State private var isShowConfirmationSignOutAlert = false           // サインアウト確認アラート
+    @State private var isShowConfirmationWithdrawalAlert = false        // 退会確認アラート
     
     // DB
     @State private var email: String = ""               // メールアドレス
@@ -54,6 +56,18 @@ struct NotConfirmEmailView: View {
                 .disabled(disabled)
                 
                 Spacer()
+                
+                Spacer()
+                
+//                Button {
+//                    isShowConfirmationWithdrawalAlert = true
+//                } label: {
+//                    Text("データ削除")
+//                        .foregroundStyle(.red)
+//                }
+                
+//                Spacer()
+                Spacer()
             }
             // タップでキーボードを閉じるようにするため
             .contentShape(Rectangle())
@@ -68,11 +82,78 @@ struct NotConfirmEmailView: View {
             .navigationDestination(isPresented: $vm.isNavigateConfirmEmailView) {
                 ConfirmEmailView(email: $email, password: $password, didCompleteLoginProcess: didCompleteLoginProcess)
             }
+            .background(Color(String.yellow))
         }
         .asSingleAlert(title: "",
                        isShowAlert: $vm.isShowError,
                        message: vm.errorMessage,
                        didAction: { vm.isShowError = false })
+        .asDestructiveAlert(title: "",
+                            isShowAlert: $isShowConfirmationSignOutAlert,
+                            message: "ログアウトしますか？",
+                            buttonText: "ログアウト",
+                            didAction: {
+            DispatchQueue.main.async {
+                isShowConfirmationSignOutAlert = false
+            }
+            handleSignOut()
+        })
+        .asDestructiveAlert(title: "",
+                            isShowAlert: $isShowConfirmationWithdrawalAlert,
+                            message: "データを削除しますか？",
+                            buttonText: "データ削除",
+                            didAction: {
+            handleWithdrawal()
+            //            DispatchQueue.main.async {
+            //                isShowConfirmationWithdrawalAlert = false
+            //            }
+//                        isShowSuccessWithdrawalAlert = true
+        })
+    }
+    
+    // MARK: - 退会処理
+    /// - Parameters: なし
+    /// - Returns: なし
+    private func handleWithdrawal() {
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
+        
+        // 認証情報削除
+        vm.deleteAuth()
+        
+        // ユーザー情報削除
+        vm.deleteUser(document: uid)
+        
+        // メッセージを削除
+        for recentMessage in vm.recentMessages {
+            vm.deleteMessage(document: uid, collection: FirebaseManager.shared.auth.currentUser?.uid == recentMessage.fromId ? recentMessage.toId : recentMessage.fromId)
+        }
+        
+        // 最新メッセージを削除
+        for recentMessage in vm.recentMessages {
+            vm.deleteRecentMessage(document1: uid, document2: FirebaseManager.shared.auth.currentUser?.uid == recentMessage.fromId ? recentMessage.toId : recentMessage.fromId)
+        }
+        
+        // 友達を削除
+        for friend in vm.friends {
+            vm.deleteFriend(document1: uid, document2: friend.uid)
+        }
+        
+        // 店舗ポイント情報を削除
+        for storePoint in vm.storePoints {
+            vm.deleteStorePoint(document1: uid, document2: storePoint.uid)
+        }
+        
+        // 画像削除
+        vm.deleteImage(withPath: uid)
+        
+        isShowConfirmationWithdrawalAlert = false
+    }
+    
+    // MARK: - サインアウト
+    /// - Parameters: なし
+    /// - Returns: なし
+    private func handleSignOut() {
+        try? FirebaseManager.shared.auth.signOut()
     }
 }
 

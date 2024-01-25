@@ -58,14 +58,13 @@ struct ConfirmEmailView: View {
                 
                 Spacer()
                 
-                Button {
-                    vm.handleSignInWithEmailVerification(email: email, password: password)
-//                    vm.handleEmailVerification()
-                    isShowSendEmailAlert = true
-                } label: {
-                    Text("メールを再送する")
-                        .foregroundStyle(.blue)
-                }
+//                Button {
+//                    vm.handleSignInWithEmailVerification(email: email, password: password)
+//                    isShowSendEmailAlert = true
+//                } label: {
+//                    Text("メールを再送する")
+//                        .foregroundStyle(.blue)
+//                }
                 
                 Spacer()
                 Spacer()
@@ -75,6 +74,7 @@ struct ConfirmEmailView: View {
             .overlay {
                 ScaleEffectIndicator(onIndicator: $vm.onIndicator)
             }
+            .background(Color(String.yellow))
         }
         .asAlertBackButton {
             isShowDeleteDataAlert = true
