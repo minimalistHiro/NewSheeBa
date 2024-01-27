@@ -9,10 +9,12 @@ import SwiftUI
 
 struct GetPointView: View {
     
+//    @ObservedObject var vm = ViewModel()
     @Environment(\.dismiss) var dismiss
     let chatUser: ChatUser?
     let getPoint: String
-    let isSameStoreScanError: Bool
+    @Binding var isSameStoreScanError: Bool
+    @Binding var isQrCodeScanError: Bool
     
     var body: some View {
         NavigationStack {
@@ -20,22 +22,28 @@ struct GetPointView: View {
                 Spacer()
                 
                 // トップ画像
-                VStack {
-                    if let image = chatUser?.profileImageUrl, image != "" {
-                        Icon.CustomWebImage(imageSize: .large, image: image)
-                    } else {
-                        Icon.CustomCircle(imageSize: .large)
+                if !isQrCodeScanError {
+                    VStack {
+                        if let image = chatUser?.profileImageUrl, image != "" {
+                            Icon.CustomWebImage(imageSize: .large, image: image)
+                        } else {
+                            Icon.CustomCircle(imageSize: .large)
+                        }
+                        Text(chatUser?.username ?? "")
+                            .font(.title2)
+                            .bold()
+                            .padding()
                     }
-                    Text(chatUser?.username ?? "")
-                        .font(.title2)
-                        .bold()
-                        .padding()
                 }
                 
                 Spacer()
                 
                 if isSameStoreScanError {
                     Text("1店舗につき1日1回のみポイントが貰えます。")
+                        .bold()
+                        .padding()
+                } else if isQrCodeScanError {
+                    Text("誤ったQRコードがスキャンされました。")
                         .bold()
                         .padding()
                 } else {
@@ -55,6 +63,8 @@ struct GetPointView: View {
                 Spacer()
                 
                 Button {
+                    isSameStoreScanError = false
+                    isQrCodeScanError = false
                     dismiss()
                 } label: {
                     CustomCapsule(text: "戻る", imageSystemName: nil, foregroundColor: .black, textColor: .white, isStroke: false)
@@ -69,5 +79,5 @@ struct GetPointView: View {
 }
 
 #Preview {
-    GetPointView(chatUser: nil, getPoint: "1", isSameStoreScanError: false)
+    GetPointView(chatUser: nil, getPoint: "1", isSameStoreScanError: .constant(false), isQrCodeScanError: .constant(false))
 }

@@ -31,7 +31,7 @@ final class ViewModel: ObservableObject {
     
     @Published var isScroll = false                             // メッセージスクロール用変数
     @Published var onIndicator = false                          // インジケーターが進行中か否か
-    @Published var isQrCodeScanError = false                    // QRコード読み取りエラー
+//    @Published var isQrCodeScanError = false                    // QRコード読み取りエラー
     @Published var isNavigateConfirmEmailView = false           // メールアドレス認証画面の表示有無
     @Published var isNavigateNotConfirmEmailView = false        // メールアドレス未認証画面の表示有無
     @Published var isShowNotConfirmEmailError = false           // メールアドレス未認証エラー
@@ -87,7 +87,8 @@ final class ViewModel: ObservableObject {
 //                    self.isShowNotConfirmEmailError = true
 //                    try? FirebaseManager.shared.auth.signOut()
 //                }
-                if !user.isEmailVerified {
+                // メールアドレス未認証の場合のエラー
+                if !user.isEmailVerified && !currentUser.isStore {
                     self.isShowNotConfirmEmailError = true
                     try? FirebaseManager.shared.auth.signOut()
                     return
@@ -117,7 +118,7 @@ final class ViewModel: ObservableObject {
                 self.handleNetworkError(error: error, errorMessage: String.failureFetchUser)
                 
                 guard let data = snapshot?.data() else {
-                    self.isQrCodeScanError = true
+//                    self.isQrCodeScanError = true
                     self.handleError(String.notFoundData, error: nil)
                     return
                 }
