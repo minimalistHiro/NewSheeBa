@@ -32,6 +32,7 @@ struct HomeView: View {
             } else {
                 ScrollView {
                     LazyVStack {
+                        titleView
                         cardView
                             .padding(.top, 10)
                         menuButtons
@@ -105,6 +106,19 @@ struct HomeView: View {
         }
     }
     
+    // MARK: - titleView
+    private var titleView: some View {
+        HStack {
+            Image(String.clearTitle)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 100)
+                .padding(.horizontal)
+                .padding(.top, 10)
+            Spacer()
+        }
+    }
+    
     // MARK: - cardView
     private var cardView: some View {
         Rectangle()
@@ -162,7 +176,7 @@ struct HomeView: View {
                     Spacer()
                 }
             }
-            .padding()
+            .padding(.horizontal)
     }
     
     // MARK: - buttons

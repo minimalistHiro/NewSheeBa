@@ -27,7 +27,7 @@ struct EntryView: View {
                     Spacer()
                     Spacer()
                     
-                    Image("Title")
+                    Image(String.title)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 250)

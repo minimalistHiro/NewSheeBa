@@ -12,6 +12,7 @@ struct AccountView: View {
     
     @ObservedObject var vm = ViewModel()
     @ObservedObject var userSetting = UserSetting()
+    @State private var isShowPrivacyPolicyAlert = false                 // プライバシーポリシー表示確認アラート
     @State private var isShowConfirmationSignOutAlert = false           // サインアウト確認アラート
     @State private var isShowConfirmationWithdrawalAlert = false        // 退会確認アラート
     @State private var isShowSuccessWithdrawalAlert = false             // 退会成功アラート
@@ -103,6 +104,14 @@ struct AccountView: View {
                     Text("ポイントを表示する")
                 })
                 
+                // プライバシーポリシー
+                Button {
+                    isShowPrivacyPolicyAlert = true
+                } label: {
+                    Text("プライバシーポリシー")
+                        .foregroundColor(.black)
+                }
+                
                 // ログアウト
                 Button {
                     isShowConfirmationSignOutAlert = true
@@ -133,6 +142,17 @@ struct AccountView: View {
                 isUserCurrentryLoggedOut = true
             }
         }
+        .asDoubleAlert(title: "",
+                       isShowAlert: $isShowPrivacyPolicyAlert,
+                       message: "外部リンクに飛びます。よろしいですか？",
+                       buttonText: "はい",
+                       didAction: {
+            DispatchQueue.main.async {
+                isShowPrivacyPolicyAlert = false
+            }
+            UIApplication.shared.open(URL(string: Setting.privacyPolicyURL)!)
+//            openURL(URL(string: Setting.privacyPolicyURL)!)
+        })
         .asDestructiveAlert(title: "",
                             isShowAlert: $isShowConfirmationSignOutAlert,
                             message: "ログアウトしますか？",

@@ -385,7 +385,7 @@ final class ViewModel: ObservableObject {
                     self.handleError(String.networkError, error: error)
                     return
                 default:
-                    self.handleError(error.domain, error: error)
+                    self.handleError("\(errorCode)", error: error)
                     return
                 }
             }
@@ -435,7 +435,10 @@ final class ViewModel: ObservableObject {
                 case .invalidEmail:
                     self.handleError(String.invalidEmail, error: error)
                     return
-                case .userNotFound, .wrongPassword:
+                case .userNotFound:
+                    self.handleError(String.userNotFound, error: error)
+                    return
+                case .wrongPassword:
                     self.handleError(String.userNotFound, error: error)
                     return
                 case .userDisabled:
@@ -444,8 +447,11 @@ final class ViewModel: ObservableObject {
                 case .networkError:
                     self.handleError(String.networkError, error: error)
                     return
+                case .invalidCredential:
+                    self.handleError(String.userNotFound, error: error)
+                    return
                 default:
-                    self.handleError(error.domain, error: error)
+                    self.handleError("\(errorCode)", error: error)
                     return
                 }
             }
@@ -478,8 +484,11 @@ final class ViewModel: ObservableObject {
                 case .networkError:
                     self.handleError(String.networkError, error: error)
                     return
+                case .invalidCredential:
+                    self.handleError(String.userNotFound, error: error)
+                    return
                 default:
-                    self.handleError(error.domain, error: error)
+                    self.handleError("\(errorCode)", error: error)
                     return
                 }
             }
@@ -528,8 +537,11 @@ final class ViewModel: ObservableObject {
                 case .networkError:
                     self.handleError(String.networkError, error: error)
                     return
+                case .invalidCredential:
+                    self.handleError(String.userNotFound, error: error)
+                    return
                 default:
-                    self.handleError(error.domain, error: error)
+                    self.handleError("\(errorCode)", error: error)
                     return
                 }
             }

@@ -173,8 +173,6 @@ struct CameraView: View {
 //            vm.fetchUser(uid: chatUserUID)
 //            vm.fetchStorePoint(document1: uid, document2: self.chatUserUID)
             
-//            divideScanProcess()
-            
             // ユーザー情報を取得
             FirebaseManager.shared.firestore
                 .collection(FirebaseConstants.users)
@@ -182,8 +180,8 @@ struct CameraView: View {
                 .getDocument { snapshot, error in
                     vm.handleNetworkError(error: error, errorMessage: String.failureFetchUser)
                     
+                    // ユーザー情報を取得できなかった場合、QRコードスキャンエラー
                     guard let data = snapshot?.data() else {
-//                        vm.isQrCodeScanError = true
                         isQrCodeScanError = true
                         self.isShowGetPointView = true
                         return
@@ -202,57 +200,55 @@ struct CameraView: View {
                                 return
                             }
                             
+                            // 店舗ポイント情報が以前に一度も取得していなかった場合
                             guard let data = snapshot?.data() else {
-                                // 店舗ポイントアカウントのみ、店舗ポイント情報がない場合ポイント獲得
                                 if chatUser.isStore {
+                                    // 店舗ポイントアカウントの場合、ポイントを獲得
                                     handleGetPointFromStore(chatUser: chatUser)
                                     self.isShowGetPointView = true
                                     return
+                                } else {
+                                    // 店舗ポイントアカウント以外の場合、送ポイント画面を表示
+                                    self.isShowSendPayView = true
+                                    return
                                 }
-                                return
                             }
                             vm.storePoint = .init(data: data)
                             divideScanProcess(chatUser: chatUser)
                         }
                 }
         case .failure(let error):
-//            vm.isQrCodeScanError = true
             isQrCodeScanError = true
             self.isShowGetPointView = true
             print("Error: \(error.localizedDescription)")
         }
     }
     
+    // MARK: - QRコード読み取り結果を場合分けする。
+    /// - Parameters:
+    ///   - chatUser: 読み取ったQRコードのユーザー情報
+    /// - Returns: なし
     private func divideScanProcess(chatUser: ChatUser) {
-        // 遅らせてSendPayViewを表示する
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            // 店舗QRコードの場合
-            if chatUser.isStore {
-                // 店舗ポイント情報がある場合は場合分け、ない場合はポイントを獲得する。
-                if let storePoint = vm.storePoint {
-                    // 店舗QRコードが同日に2度以上のスキャンでない場合
-                    if storePoint.date != vm.dateFormat(Date()) {
-                        handleGetPointFromStore(chatUser: chatUser)
-                        self.isShowGetPointView = true
-//                                            return
-                    } else {
-//                            vm.isQrCodeScanError = true
-                        isSameStoreScanError = true
-                        self.isShowGetPointView = true
-//                                            return
-                    }
-                } else {
+        // 店舗ポイントアカウントの場合
+        if chatUser.isStore {
+            // 店舗ポイント情報がある場合は場合分け、ない場合はポイントを獲得する。
+            if let storePoint = vm.storePoint {
+                // 店舗QRコードが同日に2度以上のスキャンでない場合
+                if storePoint.date != vm.dateFormat(Date()) {
                     handleGetPointFromStore(chatUser: chatUser)
                     self.isShowGetPointView = true
-//                                        return
+                } else {
+                    isSameStoreScanError = true
+                    self.isShowGetPointView = true
                 }
             } else {
-                if !isQrCodeScanError {
-                    self.isShowSendPayView = true
-//                                        return
-                }
+                handleGetPointFromStore(chatUser: chatUser)
+                self.isShowGetPointView = true
             }
-//        }
+        } else {
+            // 店舗ポイントアカウント以外の場合、送ポイント画面を表示
+            self.isShowSendPayView = true
+        }
     }
     
     // MARK: - 店舗からポイント取得処理

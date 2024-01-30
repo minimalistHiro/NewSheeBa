@@ -16,6 +16,7 @@ final class Setting {
     static let getPointFromStore: String = "1"                  // 店舗からの取得ポイント
     
     // MARK: - 各種設定
+    static let privacyPolicyURL: String = "https://www.shibaginzadori.com/?page_id=1070"// プライバシーポリシーURL
     // SendPayView
     static let minPasswordOfDigits = 8                          // パスワード最小桁数
     static let maxNumberOfDigits = 6                            // 最大送金桁数
