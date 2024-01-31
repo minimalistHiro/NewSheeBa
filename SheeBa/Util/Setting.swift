@@ -15,8 +15,10 @@ final class Setting {
     static let newRegistrationBenefits: String = "20"           // 新規登録特典。プレゼントポイント
     static let getPointFromStore: String = "1"                  // 店舗からの取得ポイント
     
-    // MARK: - 各種設定
+    // MARK: - URL
     static let privacyPolicyURL: String = "https://www.shibaginzadori.com/?page_id=1070"// プライバシーポリシーURL
+    
+    // MARK: - 各種設定
     // SendPayView
     static let minPasswordOfDigits = 8                          // パスワード最小桁数
     static let maxNumberOfDigits = 6                            // 最大送金桁数

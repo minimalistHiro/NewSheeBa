@@ -144,14 +144,13 @@ struct AccountView: View {
         }
         .asDoubleAlert(title: "",
                        isShowAlert: $isShowPrivacyPolicyAlert,
-                       message: "外部リンクに飛びます。よろしいですか？",
+                       message: String.jumpToExternalLink,
                        buttonText: "はい",
                        didAction: {
             DispatchQueue.main.async {
                 isShowPrivacyPolicyAlert = false
             }
             UIApplication.shared.open(URL(string: Setting.privacyPolicyURL)!)
-//            openURL(URL(string: Setting.privacyPolicyURL)!)
         })
         .asDestructiveAlert(title: "",
                             isShowAlert: $isShowConfirmationSignOutAlert,

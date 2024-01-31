@@ -73,6 +73,7 @@ struct Tutorial: View {
                 Spacer()
                 Spacer()
                 Spacer()
+                Spacer()
                 
                 if selectedTab == lastPage {
                     agreeButton
@@ -114,7 +115,7 @@ struct Tutorial: View {
                         .frame(height: 100)
                 } else {
                     
-                    Text(String.privacyPolicyTitle)
+                    Text(String.termsOfServiceTitle)
                         .fontWeight(.bold)
                         .font(.title2)
                     privacyPolicy
@@ -158,102 +159,103 @@ struct Tutorial: View {
     // プライバシーポリシー
     private var privacyPolicy: some View {
         ScrollView {
-            Text(String.privacyPolicyExplanation)
+            Text(String.termsOfServiceExplanation)
                 .font(.subheadline)
                 .frame(alignment: .leading)
             Group {
-                Text(String.privacyPolicyTitle1)
+                Text(String.termsOfServiceTitle1)
                     .fontWeight(.bold)
                     .font(.title3)
                     .padding(.vertical)
-                Text(String.privacyPolicyArticle1)
+                Text(String.termsOfServiceArticle1)
                     .font(.subheadline)
                     .frame(alignment: .leading)
             }
             Group {
-                Text(String.privacyPolicyTitle2)
+                Text(String.termsOfServiceTitle2)
                     .fontWeight(.bold)
                     .font(.title3)
                     .padding(.vertical)
-                Text(String.privacyPolicyArticle2)
+                Text(String.termsOfServiceArticle2)
                     .font(.subheadline)
                     .frame(alignment: .leading)
             }
             Group {
-                Text(String.privacyPolicyTitle3)
+                Text(String.termsOfServiceTitle3)
                     .fontWeight(.bold)
                     .font(.title3)
                     .padding(.vertical)
-                Text(String.privacyPolicyArticle3)
+                Text(String.termsOfServiceArticle3)
                     .font(.subheadline)
                     .frame(alignment: .leading)
             }
             Group {
-                Text(String.privacyPolicyTitle4)
+                Text(String.termsOfServiceTitle4)
                     .fontWeight(.bold)
                     .font(.title3)
                     .padding(.vertical)
-                Text(String.privacyPolicyArticle4)
+                Text(String.termsOfServiceArticle4)
                     .font(.subheadline)
                     .frame(alignment: .leading)
             }
             Group {
-                Text(String.privacyPolicyTitle5)
+                Text(String.termsOfServiceTitle5)
                     .fontWeight(.bold)
                     .font(.title3)
                     .padding(.vertical)
-                Text(String.privacyPolicyArticle5)
+                Text(String.termsOfServiceArticle5)
                     .font(.subheadline)
                     .frame(alignment: .leading)
             }
             Group {
-                Text(String.privacyPolicyTitle6)
+                Text(String.termsOfServiceTitle6)
                     .fontWeight(.bold)
                     .font(.title3)
                     .padding(.vertical)
-                Text(String.privacyPolicyArticle6)
+                Text(String.termsOfServiceArticle6)
                     .font(.subheadline)
                     .frame(alignment: .leading)
             }
             Group {
-                Text(String.privacyPolicyTitle7)
+                Text(String.termsOfServiceTitle7)
                     .fontWeight(.bold)
                     .font(.title3)
                     .padding(.vertical)
-                Text(String.privacyPolicyArticle7)
+                Text(String.termsOfServiceArticle7)
                     .font(.subheadline)
                     .frame(alignment: .leading)
             }
             Group {
-                Text(String.privacyPolicyTitle8)
+                Text(String.termsOfServiceTitle8)
                     .fontWeight(.bold)
                     .font(.title3)
                     .padding(.vertical)
-                Text(String.privacyPolicyArticle8)
+                Text(String.termsOfServiceArticle8)
                     .font(.subheadline)
                     .frame(alignment: .leading)
             }
             Group {
-                Text(String.privacyPolicyTitle9)
+                Text(String.termsOfServiceTitle9)
                     .fontWeight(.bold)
                     .font(.title3)
                     .padding(.vertical)
-                Text(String.privacyPolicyArticle9)
+                Text(String.termsOfServiceArticle9)
                     .font(.subheadline)
                     .frame(alignment: .leading)
             }
             Group {
-                Text(String.privacyPolicyTitle10)
+                Text(String.termsOfServiceTitle10)
                     .fontWeight(.bold)
                     .font(.title3)
                     .padding(.vertical)
-                Text(String.privacyPolicyArticle10)
+                Text(String.termsOfServiceArticle10)
                     .font(.subheadline)
                     .frame(alignment: .leading)
             }
         }
         .frame(height: CGFloat(UIScreen.main.bounds.height / 2))
         .padding()
+        .background(Color(String.chatLogBackground))
     }
 }
 
