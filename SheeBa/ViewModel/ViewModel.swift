@@ -23,6 +23,7 @@ final class ViewModel: ObservableObject {
     @Published var friends = [Friend]()                         // 全友達情報
     @Published var storePoint: StorePoint?                      // 特定の店舗ポイント情報
     @Published var storePoints = [StorePoint]()                 // 全店舗ポイント情報
+    @Published var alertNotification: AlertNotification?        // 速報
     
     @Published var errorMessage = ""                            // エラーメッセージ
     @Published var isShowError = false                          // エラー表示有無
@@ -118,7 +119,6 @@ final class ViewModel: ObservableObject {
                 self.handleNetworkError(error: error, errorMessage: String.failureFetchUser)
                 
                 guard let data = snapshot?.data() else {
-//                    self.isQrCodeScanError = true
                     self.handleError(String.notFoundData, error: nil)
                     return
                 }
@@ -336,6 +336,27 @@ final class ViewModel: ObservableObject {
                     }
                 })
             }
+    }
+    
+    /// 全アラートを取得
+    /// - Parameters: なし
+    /// - Returns: なし
+    func fetchAlerts() {
+        FirebaseManager.shared.firestore
+            .collection(FirebaseConstants.alerts)
+            .getDocuments { documentsSnapshot, error in
+            if error != nil {
+                print("全アラートの取得に失敗しました。")
+                return
+            }
+            
+            documentsSnapshot?.documents.forEach({ snapshot in
+                let data = snapshot.data()
+                let alert = AlertNotification(data: data)
+                
+                self.alertNotification = alert
+            })
+        }
     }
     
 // MARK: - Handle

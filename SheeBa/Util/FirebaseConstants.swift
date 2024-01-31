@@ -44,4 +44,8 @@ struct FirebaseConstants {
     static let storePoints = "storePoints"
     static let getPoint = "getPoint"
     static let date = "date"
+    
+    // alerts
+    static let alerts = "alerts"
+    static let title = "title"
 }

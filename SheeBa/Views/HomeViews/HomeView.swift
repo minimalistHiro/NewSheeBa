@@ -33,6 +33,9 @@ struct HomeView: View {
                 ScrollView {
                     LazyVStack {
                         titleView
+                        if let alertNotification = vm.alertNotification {
+                            notificationView
+                        }
                         cardView
                             .padding(.top, 10)
                         menuButtons
@@ -53,6 +56,7 @@ struct HomeView: View {
                     vm.fetchRecentMessages()
                     vm.fetchFriends()
                     vm.fetchStorePoints()
+                    vm.fetchAlerts()
                 }
             } else {
                 isUserCurrentryLoggedOut = true
@@ -104,6 +108,24 @@ struct HomeView: View {
                 vm.isNavigateNotConfirmEmailView = false
             }
         }
+    }
+    
+    // MARK: - notificationView
+    private var notificationView: some View {
+        Rectangle()
+            .frame(height: 40)
+            .foregroundStyle(Color.blue)
+            .overlay {
+                VStack {
+                    Text(vm.alertNotification?.title ?? "")
+                        .foregroundStyle(Color.white)
+                        .font(.caption)
+                        .bold()
+                    Text(vm.alertNotification?.text ?? "")
+                        .foregroundStyle(Color.white)
+                        .font(.caption)
+                }
+            }
     }
     
     // MARK: - titleView
