@@ -9,7 +9,6 @@ import SwiftUI
 
 struct GetPointView: View {
     
-//    @ObservedObject var vm = ViewModel()
     @Environment(\.dismiss) var dismiss
     let chatUser: ChatUser?
     let getPoint: String
@@ -32,6 +31,7 @@ struct GetPointView: View {
                         Text(chatUser?.username ?? "")
                             .font(.title2)
                             .bold()
+                            .dynamicTypeSize(.medium)
                             .padding()
                     }
                 }
@@ -41,23 +41,28 @@ struct GetPointView: View {
                 if isSameStoreScanError {
                     Text("1店舗につき1日1回のみポイントが貰えます。")
                         .bold()
+                        .dynamicTypeSize(.medium)
                         .padding()
                 } else if isQrCodeScanError {
                     Text("誤ったQRコードがスキャンされました。")
                         .bold()
+                        .dynamicTypeSize(.medium)
                         .padding()
                 } else {
                     HStack {
                         Text(getPoint)
                             .font(.system(size: 70))
                             .bold()
+                            .dynamicTypeSize(.medium)
                         Text("pt")
                             .font(.title)
+                            .dynamicTypeSize(.medium)
                     }
                     
                     Text("ゲット!")
                         .font(.system(size: 30))
                         .bold()
+                        .dynamicTypeSize(.medium)
                 }
                 
                 Spacer()

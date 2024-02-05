@@ -23,7 +23,7 @@ struct InputText {
     
     let maxEmailTextFieldCount = 40             // メールアドレス最大文字数
     let maxPhoneNumberTextFieldCount = 11       // 電話番号最大文字数
-    let maxUsernameTextFieldCount = 15          // ユーザーネーム最大文字数
+    let maxUsernameTextFieldCount = 25          // ユーザーネーム最大文字数
     let maxPasswordTextFieldCount = 30          // パスワード最大文字数
     
     // 通常テキスト
@@ -33,7 +33,6 @@ struct InputText {
         @Binding var editText: String
         let titleText: String
         let textType: TextType
-//        var isEmail: Bool
         var maxTextCount: Int {
             switch textType {
             case .email:
@@ -43,11 +42,6 @@ struct InputText {
             case .other:
                 InputText.shared.maxUsernameTextFieldCount
             }
-//            if isEmail {
-//                InputText.shared.maxEmailTextFieldCount
-//            } else {
-//                InputText.shared.maxUsernameTextFieldCount
-//            }
         }
         
         enum TextType {
@@ -71,10 +65,12 @@ struct InputText {
             VStack {
                 Text(titleText)
                     .font(.caption)
+                    .dynamicTypeSize(.medium)
                     .frame(width: UIScreen.main.bounds.width, alignment: .leading)
                     .padding(.leading, Size.textPaddingLeading)
                 TextField("", text: $editText)
                     .focused(focus.projectedValue)
+                    .dynamicTypeSize(.medium)
 //                    .keyboardType(isEmail ? .emailAddress : .default)
                     .keyboardType(textType.keyboardType)
                     .padding(.top, Size.textFieldPaddingTop)
@@ -107,12 +103,14 @@ struct InputText {
             VStack {
                 Text(titleText)
                     .font(.caption)
+                    .dynamicTypeSize(.medium)
                     .frame(width: UIScreen.main.bounds.width, alignment: .leading)
                     .padding(.leading, Size.textPaddingLeading)
                 HStack {
                     if isShowPassword {
                         TextField("", text: $editText)
                             .focused(focus.projectedValue)
+                            .dynamicTypeSize(.medium)
                             .keyboardType(.URL)
                             .padding(.top, Size.textFieldPaddingTop)
                             .padding(.horizontal, Size.textFieldPaddingHeight)
@@ -125,6 +123,7 @@ struct InputText {
                     } else {
                         SecureField("", text: $editText)
                             .focused(focus.projectedValue)
+                            .dynamicTypeSize(.medium)
                             .keyboardType(.URL)
                             .padding(.top, Size.textFieldPaddingTop)
                             .padding(.horizontal, Size.textFieldPaddingHeight)
@@ -140,6 +139,7 @@ struct InputText {
                     } label: {
                         Image(systemName: isShowPassword ? "eye.fill" : "eye.slash.fill")
                             .padding(.trailing, Size.imagePaddingTrailing)
+                            .dynamicTypeSize(.medium)
                             .foregroundColor(.black)
                     }
                 }
@@ -164,19 +164,23 @@ struct InputText {
             VStack {
                 Text(titleText)
                     .font(.caption)
+                    .dynamicTypeSize(.medium)
                     .frame(width: UIScreen.main.bounds.width, alignment: .leading)
                     .padding(.leading, Size.textPaddingLeading)
                 HStack {
                     Text(editText.isEmpty ? explanationText : editText)
+                        .dynamicTypeSize(.medium)
                         .foregroundStyle(editText.isEmpty ? .gray : .black)
                     Spacer()
                     Picker("", selection: $editText) {
                         ForEach(pickers, id: \.self) { picker in
-                            Text(picker).tag(picker)
+                            Text(picker)
+                                .tag(picker)
+                                .dynamicTypeSize(.medium)
                         }
                     }
                     .pickerStyle(.menu)
-                    .tint(.gray)
+                    .tint(.blue)
                 }
                 .padding(.horizontal, Size.textFieldPaddingHeight)
                 Rectangle()

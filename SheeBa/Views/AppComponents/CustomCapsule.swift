@@ -41,6 +41,7 @@ struct CustomCapsule: View {
                             .padding(.vertical, paddingVertical)
                             .font(.headline)
                             .bold()
+                            .dynamicTypeSize(.medium)
                     }
                 }
                 .padding(.horizontal, paddingHorizontal)
@@ -62,6 +63,7 @@ struct CustomCapsule: View {
                             .padding(.vertical, paddingVertical)
                             .font(.headline)
                             .bold()
+                            .dynamicTypeSize(.medium)
                     }
                 }
                 .padding(.horizontal, paddingHorizontal)

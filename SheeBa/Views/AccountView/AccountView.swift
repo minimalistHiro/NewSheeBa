@@ -30,46 +30,104 @@ struct AccountView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
-//                Color(String.sheeba)
-//                    .ignoresSafeArea()
+//            HStack {
+                Spacer()
+                Spacer()
                 
-                VStack {
-                    // トップ画像
-                    NavigationLink {
-                        UpdateImageView()
-                    } label: {
-                        if let image = vm.currentUser?.profileImageUrl, image != "" {
-                            Icon.CustomWebImage(imageSize: .large, image: image)
-                                .overlay {
-                                    Icon.CustomImageChangeCircle(imageSize: .large)
+                Rectangle()
+                    .foregroundColor(Color(String.yellow))
+                    .frame(width: 300, height: 200)
+                    .cornerRadius(20)
+                    .shadow(radius: 7, x: 0, y: 0)
+                    .overlay {
+                        VStack {
+                            Spacer()
+                            
+                            HStack {
+                                Spacer()
+                                
+                                // トップ画像
+                                NavigationLink {
+                                    UpdateImageView()
+                                } label: {
+                                    if let image = vm.currentUser?.profileImageUrl, image != "" {
+                                        Icon.CustomWebImage(imageSize: .large, image: image)
+                                            .overlay {
+                                                Icon.CustomImageChangeCircle(imageSize: .large)
+                                            }
+    //                                        .padding(.top, 20)
+                                    } else {
+                                        Icon.CustomCircle(imageSize: .large)
+                                            .overlay {
+                                                Icon.CustomImageChangeCircle(imageSize: .large)
+                                            }
+    //                                        .padding(.top, 20)
+                                    }
                                 }
-                                .padding(.top, 20)
-                        } else {
-                            Icon.CustomCircle(imageSize: .large)
-                                .overlay {
-                                    Icon.CustomImageChangeCircle(imageSize: .large)
-                                }
-                                .padding(.top, 20)
+                                
+                                Spacer()
+                                
+                                Text(vm.currentUser?.username ?? "しば太郎")
+                                    .font(.title3)
+                                    .bold()
+                                    .dynamicTypeSize(.medium)
+                                    .padding()
+                                
+                                Spacer()
+                            }
+                            Spacer()
+                            
+                            Text("しばID : " + (vm.currentUser?.id ?? ""))
+                                .font(.caption)
+                                .dynamicTypeSize(.medium)
+                            
+                            Spacer()
                         }
                     }
-                    
-                    Text(vm.currentUser?.username ?? "しば太郎")
-                        .font(.title3)
-                        .bold()
-                        .padding()
-                    
-                    Text("しばID : " + (vm.currentUser?.id ?? ""))
-                        .font(.caption)
-                        .padding(.bottom, 60)
-                }
-            }
+//            HStack {
+//                VStack {
+//                    // トップ画像
+//                    NavigationLink {
+//                        UpdateImageView()
+//                    } label: {
+//                        if let image = vm.currentUser?.profileImageUrl, image != "" {
+//                            Icon.CustomWebImage(imageSize: .large, image: image)
+//                                .overlay {
+//                                    Icon.CustomImageChangeCircle(imageSize: .large)
+//                                }
+//                                .padding(.top, 20)
+//                        } else {
+//                            Icon.CustomCircle(imageSize: .large)
+//                                .overlay {
+//                                    Icon.CustomImageChangeCircle(imageSize: .large)
+//                                }
+//                                .padding(.top, 20)
+//                        }
+//                    }
+//                    
+//                    Text(vm.currentUser?.username ?? "しば太郎")
+//                        .font(.title3)
+//                        .bold()
+//                        .dynamicTypeSize(.medium)
+//                        .padding()
+//                    
+//                    Text("しばID : " + (vm.currentUser?.id ?? ""))
+//                        .font(.caption)
+//                        .dynamicTypeSize(.medium)
+//                        .padding(.bottom, 60)
+//                }
+//                
+//                Spacer()
+//            }
+//            .background(Color(String.yellow))
             
             Text("設定")
                 .font(.callout)
                 .bold()
+                .dynamicTypeSize(.medium)
                 .frame(width: UIScreen.main.bounds.width, alignment: .leading)
                 .padding(.leading, 50)
+                .padding(.top)
             
             List {
                 // ユーザー名を変更
@@ -93,7 +151,7 @@ struct AccountView: View {
                     } label: {
                         HStack {
                             Text("ユーザー属性分析")
-                                .foregroundStyle(.black)
+                                .dynamicTypeSize(.medium)
                             Spacer()
                         }
                     }
@@ -234,7 +292,7 @@ struct AccountView: View {
         // ユーザー情報削除
         vm.deleteUser(document: uid)
         
-        // メッセージを削除
+    // メッセージを削除
         for recentMessage in vm.recentMessages {
             vm.deleteMessage(document: uid, collection: FirebaseManager.shared.auth.currentUser?.uid == recentMessage.fromId ? recentMessage.toId : recentMessage.fromId)
         }

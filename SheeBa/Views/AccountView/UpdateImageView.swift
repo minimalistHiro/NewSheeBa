@@ -60,6 +60,7 @@ struct UpdateImageView: View {
                 Spacer()
                 Spacer()
             }
+            .background(Color(String.yellow))
             .overlay {
                 ScaleEffectIndicator(onIndicator: $vm.onIndicator)
             }

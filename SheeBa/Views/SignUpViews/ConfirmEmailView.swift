@@ -38,6 +38,7 @@ struct ConfirmEmailView: View {
                     .lineSpacing(10)
                     .font(.title2)
                     .bold()
+                    .dynamicTypeSize(.medium)
                     .padding(.horizontal)
                 
                 Spacer()
@@ -45,6 +46,7 @@ struct ConfirmEmailView: View {
                 Text("送信したメールアドレス内のリンクを開き、メールアドレスの認証を完了してください。")
                     .lineSpacing(10)
                     .font(.callout)
+                    .dynamicTypeSize(.medium)
                     .padding(.horizontal)
                 
                 Spacer()

@@ -64,6 +64,7 @@ extension String {
     static let failureDeleteImage = "画像の削除に失敗しました。"
     static let failureDeleteAuth = "認証情報の削除に失敗しました。"
     static let jumpToExternalLink = "外部リンクに飛びます。よろしいですか？"
+    static let failureSendEmail = "メール送信に失敗しました。\nしばらく経ってから再度お試しください。"
     
     // Preview
     static let previewUsername = "test"

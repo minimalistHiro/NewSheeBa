@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+struct TutorialText: Hashable {
+    let title: String
+    let text: String
+}
+
 struct TutorialView: View {
     
     let didCompleteTutorialProcess: () -> ()
@@ -39,6 +44,7 @@ struct TutorialView: View {
                                     selectedTab = pages.endIndex
                                 } label: {
                                     Text("スキップ")
+                                        .dynamicTypeSize(.medium)
                                 }
                             }
                         }
@@ -64,6 +70,38 @@ struct Tutorial: View {
         }
         return false
     }                                           // ボタンの有効性
+    let tutorialText: [TutorialText] = [
+        TutorialText(
+            title: String.termsOfServiceTitle1,
+            text: String.termsOfServiceArticle1),
+        TutorialText(
+            title: String.termsOfServiceTitle2,
+            text: String.termsOfServiceArticle2),
+        TutorialText(
+            title: String.termsOfServiceTitle3,
+            text: String.termsOfServiceArticle3),
+        TutorialText(
+            title: String.termsOfServiceTitle4,
+            text: String.termsOfServiceArticle4),
+        TutorialText(
+            title: String.termsOfServiceTitle5,
+            text: String.termsOfServiceArticle5),
+        TutorialText(
+            title: String.termsOfServiceTitle6,
+            text: String.termsOfServiceArticle6),
+        TutorialText(
+            title: String.termsOfServiceTitle7,
+            text: String.termsOfServiceArticle7),
+        TutorialText(
+            title: String.termsOfServiceTitle8,
+            text: String.termsOfServiceArticle8),
+        TutorialText(
+            title: String.termsOfServiceTitle9,
+            text: String.termsOfServiceArticle9),
+        TutorialText(
+            title: String.termsOfServiceTitle10,
+            text: String.termsOfServiceArticle10),
+    ]
 
     var body: some View {
         ZStack {
@@ -113,11 +151,12 @@ struct Tutorial: View {
                         .font(.title2)
                         .bold()
                         .frame(height: 100)
+                        .dynamicTypeSize(.medium)
                 } else {
-                    
                     Text(String.termsOfServiceTitle)
                         .fontWeight(.bold)
                         .font(.title2)
+                        .dynamicTypeSize(.medium)
                     privacyPolicy
                 }
                 
@@ -152,105 +191,28 @@ struct Tutorial: View {
             Text("同意します")
                 .font(.title3)
                 .bold()
+                .dynamicTypeSize(.medium)
         }
         .padding(.bottom)
     }
     
-    // プライバシーポリシー
+    // 利用規約
     private var privacyPolicy: some View {
         ScrollView {
             Text(String.termsOfServiceExplanation)
                 .font(.subheadline)
                 .frame(alignment: .leading)
-            Group {
-                Text(String.termsOfServiceTitle1)
+                .dynamicTypeSize(.medium)
+            ForEach(tutorialText, id: \.self) { tutorialText in
+                Text(tutorialText.title)
                     .fontWeight(.bold)
                     .font(.title3)
                     .padding(.vertical)
-                Text(String.termsOfServiceArticle1)
+                    .dynamicTypeSize(.medium)
+                Text(tutorialText.text)
                     .font(.subheadline)
                     .frame(alignment: .leading)
-            }
-            Group {
-                Text(String.termsOfServiceTitle2)
-                    .fontWeight(.bold)
-                    .font(.title3)
-                    .padding(.vertical)
-                Text(String.termsOfServiceArticle2)
-                    .font(.subheadline)
-                    .frame(alignment: .leading)
-            }
-            Group {
-                Text(String.termsOfServiceTitle3)
-                    .fontWeight(.bold)
-                    .font(.title3)
-                    .padding(.vertical)
-                Text(String.termsOfServiceArticle3)
-                    .font(.subheadline)
-                    .frame(alignment: .leading)
-            }
-            Group {
-                Text(String.termsOfServiceTitle4)
-                    .fontWeight(.bold)
-                    .font(.title3)
-                    .padding(.vertical)
-                Text(String.termsOfServiceArticle4)
-                    .font(.subheadline)
-                    .frame(alignment: .leading)
-            }
-            Group {
-                Text(String.termsOfServiceTitle5)
-                    .fontWeight(.bold)
-                    .font(.title3)
-                    .padding(.vertical)
-                Text(String.termsOfServiceArticle5)
-                    .font(.subheadline)
-                    .frame(alignment: .leading)
-            }
-            Group {
-                Text(String.termsOfServiceTitle6)
-                    .fontWeight(.bold)
-                    .font(.title3)
-                    .padding(.vertical)
-                Text(String.termsOfServiceArticle6)
-                    .font(.subheadline)
-                    .frame(alignment: .leading)
-            }
-            Group {
-                Text(String.termsOfServiceTitle7)
-                    .fontWeight(.bold)
-                    .font(.title3)
-                    .padding(.vertical)
-                Text(String.termsOfServiceArticle7)
-                    .font(.subheadline)
-                    .frame(alignment: .leading)
-            }
-            Group {
-                Text(String.termsOfServiceTitle8)
-                    .fontWeight(.bold)
-                    .font(.title3)
-                    .padding(.vertical)
-                Text(String.termsOfServiceArticle8)
-                    .font(.subheadline)
-                    .frame(alignment: .leading)
-            }
-            Group {
-                Text(String.termsOfServiceTitle9)
-                    .fontWeight(.bold)
-                    .font(.title3)
-                    .padding(.vertical)
-                Text(String.termsOfServiceArticle9)
-                    .font(.subheadline)
-                    .frame(alignment: .leading)
-            }
-            Group {
-                Text(String.termsOfServiceTitle10)
-                    .fontWeight(.bold)
-                    .font(.title3)
-                    .padding(.vertical)
-                Text(String.termsOfServiceArticle10)
-                    .font(.subheadline)
-                    .frame(alignment: .leading)
+                    .dynamicTypeSize(.medium)
             }
         }
         .frame(height: CGFloat(UIScreen.main.bounds.height / 2))

@@ -46,15 +46,19 @@ struct SendPayView: View {
                 HStack {
                     Text("\(chatUser?.username ?? "No name")")
                         .font(.headline)
+                        .dynamicTypeSize(.medium)
                     Text("さんに送る")
+                        .dynamicTypeSize(.medium)
                 }
                 
                 HStack {
                     Text("\(sendPayText)")
                         .font(.system(size: 50))
                         .bold()
+                        .dynamicTypeSize(.medium)
                     Text("pt")
                         .font(.title)
+                        .dynamicTypeSize(.medium)
                 }
                 
                 Spacer()
@@ -75,6 +79,7 @@ struct SendPayView: View {
                             Text("送る")
                                 .font(.title)
                                 .foregroundStyle(.white)
+                                .dynamicTypeSize(.medium)
                         }
                 }
                 
@@ -88,6 +93,7 @@ struct SendPayView: View {
                                 .font(.largeTitle)
                                 .frame(width: 50, height: 50)
                                 .foregroundStyle(index == "AC" ? Color.red : Color.black)
+                                .dynamicTypeSize(.medium)
                         }
                     }
                 }

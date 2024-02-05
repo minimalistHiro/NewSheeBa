@@ -54,9 +54,11 @@ struct ContentView: View {
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 25)
+                                        .dynamicTypeSize(.medium)
                                     Text("スキャン")
                                         .font(.caption2)
                                         .bold()
+                                        .dynamicTypeSize(.medium)
                                 }
                                 .foregroundStyle(.white)
                             }

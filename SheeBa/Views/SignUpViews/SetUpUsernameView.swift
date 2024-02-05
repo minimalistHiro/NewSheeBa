@@ -40,6 +40,7 @@ struct SetUpUsernameView: View {
                 // トップ画像
                 Text("トップ画像（任意）")
                     .font(.callout)
+                    .dynamicTypeSize(.medium)
                 
                 Button {
                     isShowImagePicker.toggle()

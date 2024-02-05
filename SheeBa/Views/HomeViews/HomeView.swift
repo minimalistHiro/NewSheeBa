@@ -33,7 +33,7 @@ struct HomeView: View {
                 ScrollView {
                     LazyVStack {
                         titleView
-                        if let alertNotification = vm.alertNotification {
+                        if let _ = vm.alertNotification {
                             notificationView
                         }
                         cardView

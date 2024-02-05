@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CodeScanner
+//import CodeScanner
 
 struct CameraView: View {
     
@@ -28,7 +28,7 @@ struct CameraView: View {
             if let isStore = vm.currentUser?.isStore, isStore {
                 Text("店舗アカウントのため、\nカメラの読み取りは不可能です。")
             } else {
-                CodeScannerView(codeTypes: [.qr], completion: handleScan)
+                QRCodeScannerView(codeTypes: [.qr], completion: handleScan)
                     .overlay {
 //                        if vm.isQrCodeScanError {
 //                            ZStack {

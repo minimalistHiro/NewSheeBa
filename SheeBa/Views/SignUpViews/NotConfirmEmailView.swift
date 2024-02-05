@@ -38,6 +38,7 @@ struct NotConfirmEmailView: View {
                 Text("メールアドレス、パスワードを入力し、「メール送信」ボタンを押してメールアドレス認証を完了してください。")
                     .lineSpacing(10)
                     .font(.callout)
+                    .dynamicTypeSize(.medium)
                     .padding(.horizontal)
                 
                 Spacer()

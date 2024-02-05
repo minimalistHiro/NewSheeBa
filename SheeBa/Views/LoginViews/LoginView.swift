@@ -52,6 +52,7 @@ struct LoginView: View {
                     isNavigateSendEmailView = true
                 } label: {
                     Text("パスワードを忘れた方はこちら")
+                        .dynamicTypeSize(.medium)
                         .foregroundStyle(.blue)
                 }
 //                NavigationLink {
