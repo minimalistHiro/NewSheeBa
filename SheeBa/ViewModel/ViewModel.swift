@@ -134,7 +134,7 @@ final class ViewModel: ObservableObject {
             .collection(FirebaseConstants.users)
             .getDocuments { documentsSnapshot, error in
             if error != nil {
-                self.handleNetworkError(error: error, errorMessage: "全ユーザーの取得に失敗しました。")
+                self.handleNetworkError(error: error, errorMessage: String.failureFetchAllUser)
                 return
             }
             
@@ -304,9 +304,7 @@ final class ViewModel: ObservableObject {
     }
     
     /// UIDに一致する店舗ポイント情報を取得
-    /// - Parameters:
-    ///   - document1: ドキュメント1
-    ///   - document2: ドキュメント2
+    /// - Parameters: なし
     /// - Returns: なし
     func fetchStorePoints() {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }

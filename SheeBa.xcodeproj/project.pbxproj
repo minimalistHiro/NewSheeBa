@@ -85,6 +85,8 @@
 		FD1162002B46947F000B0064 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1161FF2B46947F000B0064 /* MessageView.swift */; };
 		FD1162022B46949D000B0064 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1162012B46949D000B0064 /* ImagePicker.swift */; };
 		FD1162042B4694AD000B0064 /* Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1162032B4694AD000B0064 /* Indicator.swift */; };
+		FD1255AC2B721B6C00724EFD /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1255AB2B721B6C00724EFD /* RankingView.swift */; };
+		FD1255AE2B73443500724EFD /* TodaysGetPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1255AD2B73443500724EFD /* TodaysGetPointView.swift */; };
 		FD1BFDD92B4A7E780049CC53 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1BFDD82B4A7E780049CC53 /* UIViewExtension.swift */; };
 		FD1BFDDB2B4A7FF70049CC53 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1BFDDA2B4A7FF70049CC53 /* ActivityView.swift */; };
 		FD2FA5932B70CBA500580C36 /* QRCodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2FA5922B70CBA500580C36 /* QRCodeScanner.swift */; };
@@ -152,6 +154,8 @@
 		FD1161FF2B46947F000B0064 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		FD1162012B46949D000B0064 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		FD1162032B4694AD000B0064 /* Indicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Indicator.swift; sourceTree = "<group>"; };
+		FD1255AB2B721B6C00724EFD /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
+		FD1255AD2B73443500724EFD /* TodaysGetPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysGetPointView.swift; sourceTree = "<group>"; };
 		FD1BFDD82B4A7E780049CC53 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		FD1BFDDA2B4A7FF70049CC53 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		FD2FA5922B70CBA500580C36 /* QRCodeScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScanner.swift; sourceTree = "<group>"; };
@@ -357,10 +361,8 @@
 			isa = PBXGroup;
 			children = (
 				FD1161E12B469021000B0064 /* HomeView.swift */,
-				FD1161E32B46903A000B0064 /* MoneyTransferView.swift */,
-				FD1161E52B46904D000B0064 /* CreateNewMessageView.swift */,
-				FD1161E72B46936D000B0064 /* ChatLogView.swift */,
 				FD1161E92B46937D000B0064 /* SendPayView.swift */,
+				FD1255AA2B72192F00724EFD /* MenuButtonViews */,
 				FD058BC22B468C7400D4F467 /* StoreViews */,
 				FD3E68772B4D610F00436F0A /* OwnerViews */,
 			);
@@ -416,6 +418,18 @@
 				FD1161EF2B4693B6000B0064 /* StoreQRCodeView.swift */,
 			);
 			path = StoreViews;
+			sourceTree = "<group>";
+		};
+		FD1255AA2B72192F00724EFD /* MenuButtonViews */ = {
+			isa = PBXGroup;
+			children = (
+				FD1161E32B46903A000B0064 /* MoneyTransferView.swift */,
+				FD1161E52B46904D000B0064 /* CreateNewMessageView.swift */,
+				FD1161E72B46936D000B0064 /* ChatLogView.swift */,
+				FD1255AB2B721B6C00724EFD /* RankingView.swift */,
+				FD1255AD2B73443500724EFD /* TodaysGetPointView.swift */,
+			);
+			path = MenuButtonViews;
 			sourceTree = "<group>";
 		};
 		FD3E68772B4D610F00436F0A /* OwnerViews */ = {
@@ -548,6 +562,7 @@
 			files = (
 				FD058C072B468DA100D4F467 /* AlertBackButtonModifier.swift in Sources */,
 				FD38C1552B6A136E00714172 /* AlertNotification.swift in Sources */,
+				FD1255AE2B73443500724EFD /* TodaysGetPointView.swift in Sources */,
 				FD1161F62B4693ED000B0064 /* UpdateUsernameView.swift in Sources */,
 				FD058BA82B468ACE00D4F467 /* ContentView.swift in Sources */,
 				FD1161E82B46936D000B0064 /* ChatLogView.swift in Sources */,
@@ -583,6 +598,7 @@
 				FD1161E62B46904D000B0064 /* CreateNewMessageView.swift in Sources */,
 				FD058C0D2B468DDC00D4F467 /* TripleAlertModifier.swift in Sources */,
 				FD058C0B2B468DCA00D4F467 /* DoubleAlertModifier.swift in Sources */,
+				FD1255AC2B721B6C00724EFD /* RankingView.swift in Sources */,
 				FD1161EA2B46937D000B0064 /* SendPayView.swift in Sources */,
 				FD1161FA2B469451000B0064 /* Icon.swift in Sources */,
 				FD058C1B2B468EB200D4F467 /* FirebaseManager.swift in Sources */,
@@ -737,7 +753,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SheeBa/SheeBa.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"SheeBa/Preview Content\"";
 				DEVELOPMENT_TEAM = T9U9A227FB;
 				ENABLE_PREVIEWS = YES;
@@ -756,7 +772,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hiroki.SheeBa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -775,7 +791,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SheeBa/SheeBa.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"SheeBa/Preview Content\"";
 				DEVELOPMENT_TEAM = T9U9A227FB;
 				ENABLE_PREVIEWS = YES;
@@ -794,7 +810,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hiroki.SheeBa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -22,6 +22,12 @@ struct ChatUser: Hashable, Identifiable {
     let isStore: Bool
     let isOwner: Bool
     
+    // 店舗ユーザーのみ
+    let no: Int
+    
+    // DBに保存しないデータ
+    let ranking: String
+    
     init(data: [String: Any]) {
         self.uid = data[FirebaseConstants.uid] as? String ?? ""
         self.email = data[FirebaseConstants.email] as? String ?? ""
@@ -34,6 +40,8 @@ struct ChatUser: Hashable, Identifiable {
         self.isFirstLogin = data[FirebaseConstants.isFirstLogin] as? Bool ?? false
         self.isStore = data[FirebaseConstants.isStore] as? Bool ?? false
         self.isOwner = data[FirebaseConstants.isOwner] as? Bool ?? false
+        self.no = data[FirebaseConstants.no] as? Int ?? 0
+        self.ranking = data[FirebaseConstants.rankign] as? String ?? ""
     }
 }
 

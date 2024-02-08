@@ -54,6 +54,7 @@ extension String {
     static let notFoundData = "データが見つかりませんでした。"
     static let failureFetchUID = "UIDの取得に失敗しました。"
     static let failureFetchUser = "ユーザー情報の取得に失敗しました。"
+    static let failureFetchAllUser = "全ユーザーの取得に失敗しました。"
     static let failureFetchStorePoint = "店舗ポイント情報の取得に失敗しました。"
     static let failureDeleteData = "データ削除に失敗しました。"
     static let failureDeleteUser = "ユーザー情報の削除に失敗しました。"

@@ -39,6 +39,7 @@ struct HomeView: View {
                         cardView
                             .padding(.top, 10)
                         menuButtons
+                            .padding(.top, 10)
                     }
                 }
                 // TODO: - 第2弾
@@ -203,25 +204,49 @@ struct HomeView: View {
     
     // MARK: - buttons
     private var menuButtons: some View {
-        HStack {
-            // QRコードボタン
-            if let currentUser = vm.currentUser, currentUser.isOwner {
-                NavigationLink {
-                    QRCodeView()
-                } label: {
-                    MenuButton(imageSystemName: "qrcode", text: "QRコード")
-                }
-                .foregroundColor(.black)
-            }
+        ZStack {
+            Rectangle()
+                .cornerRadius(20)
+                .padding(.horizontal, 20)
+                .foregroundColor(Color(String.darkGreen))
+                .frame(width: UIScreen.main.bounds.width, height: 70)
             
-            // TODO: - 第二弾
-            // 送るボタン
-//            NavigationLink {
-//                MoneyTransferView()
-//            } label: {
-//                MenuButton(imageSystemName: "yensign.circle", text: "送る")
-//            }
-//            .foregroundColor(.black)
+            HStack {
+                // QRコードボタン
+                if let currentUser = vm.currentUser, currentUser.isOwner {
+                    NavigationLink {
+                        QRCodeView()
+                    } label: {
+                        MenuButton(imageSystemName: "qrcode", text: "QRコード")
+                    }
+                    .foregroundColor(.white)
+                }
+                
+                // TODO: - 第二弾
+                // 送るボタン
+//                NavigationLink {
+//                    MoneyTransferView()
+//                } label: {
+//                    MenuButton(imageSystemName: "yensign.circle", text: "送る")
+//                }
+//                .foregroundColor(.white)
+                
+                // ランキングボタン
+                NavigationLink {
+                    RankingView()
+                } label: {
+                    MenuButton(imageSystemName: "trophy", text: "ランキング")
+                }
+                .foregroundColor(.white)
+                
+                // 本日の獲得ボタン
+                NavigationLink {
+                    TodaysGetPointView()
+                } label: {
+                    MenuButton(imageSystemName: "storefront", text: "本日の獲得")
+                }
+                .foregroundColor(.white)
+            }
         }
     }
     
@@ -252,10 +277,11 @@ struct HomeView: View {
                 Image(systemName: imageSystemName)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 30)
-                    .padding(.bottom, 7)
+                    .frame(width: 25)
+                    .padding(.bottom, 2)
                 Text(text)
-                    .font(.caption)
+                    .font(.caption2)
+                    .bold()
             }
             .padding()
         }
