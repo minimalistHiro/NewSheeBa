@@ -11,13 +11,13 @@ struct RankingView: View {
     
     @ObservedObject var vm = ViewModel()
     @State private var users = [ChatUser]()             // 全ユーザー
-    @State private var rank5Users = [ChatUser]()        // 取得ポイント数上位5位までのユーザー
+    @State private var rankMoneyUsers = [ChatUser]()    // 取得ポイント数上位5位までのユーザー
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVStack {
-                    ForEach(rank5Users, id: \.self) { user in
+                    ForEach(rankMoneyUsers, id: \.self) { user in
                         CardView(user: user)
                     }
                 }
@@ -147,7 +147,7 @@ struct RankingView: View {
                                 FirebaseConstants.money: user.money,
                                 FirebaseConstants.rankign: "\(count)"
                             ] as [String : Any]
-                            rank5Users.append(.init(data: data))
+                            rankMoneyUsers.append(.init(data: data))
                             
                             previousMoney = money
                         }

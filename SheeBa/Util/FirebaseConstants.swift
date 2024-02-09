@@ -17,10 +17,11 @@ struct FirebaseConstants {
     static let username = "username"
     static let age = "age"
     static let address = "address"
-    static let isConfirmEmail = "isConfirmEmail"
+//    static let isConfirmEmail = "isConfirmEmail"
     static let isFirstLogin = "isFirstLogin"
     static let isStore = "isStore"
     static let isOwner = "isOwner"
+    static let os = "os"
     static let no = "no"
     
     // messages

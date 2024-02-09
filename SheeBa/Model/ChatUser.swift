@@ -17,10 +17,11 @@ struct ChatUser: Hashable, Identifiable {
     let username: String
     let age: String
     let address: String
-    let isConfirmEmail: Bool
+//    let isConfirmEmail: Bool
     let isFirstLogin: Bool
     let isStore: Bool
     let isOwner: Bool
+    let os: String
     
     // 店舗ユーザーのみ
     let no: Int
@@ -36,10 +37,11 @@ struct ChatUser: Hashable, Identifiable {
         self.username = data[FirebaseConstants.username] as? String ?? ""
         self.age = data[FirebaseConstants.age] as? String ?? ""
         self.address = data[FirebaseConstants.address] as? String ?? ""
-        self.isConfirmEmail = data[FirebaseConstants.isConfirmEmail] as? Bool ?? false
+//        self.isConfirmEmail = data[FirebaseConstants.isConfirmEmail] as? Bool ?? false
         self.isFirstLogin = data[FirebaseConstants.isFirstLogin] as? Bool ?? false
         self.isStore = data[FirebaseConstants.isStore] as? Bool ?? false
         self.isOwner = data[FirebaseConstants.isOwner] as? Bool ?? false
+        self.os = data[FirebaseConstants.os] as? String ?? "iOS"
         self.no = data[FirebaseConstants.no] as? Int ?? 0
         self.ranking = data[FirebaseConstants.rankign] as? String ?? ""
     }
@@ -73,4 +75,10 @@ let addresses: [String] = [
     "蕨市",
     "さいたま市",
     "その他",
+]
+
+let oses: [String] = [
+    "",
+    "iOS",
+    "Android",
 ]

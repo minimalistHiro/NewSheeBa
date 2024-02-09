@@ -19,6 +19,7 @@ struct UserAttributeView: View {
     enum Tab {
         case age
         case address
+        case os
     }
     
     var body: some View {
@@ -26,19 +27,13 @@ struct UserAttributeView: View {
             HStack {
                 CustomTabBar(tab: $tab, buttonTab: .age)
                 CustomTabBar(tab: $tab, buttonTab: .address)
+                CustomTabBar(tab: $tab, buttonTab: .os)
             }
             
-//            Chart {
-//                ForEach(items, id: \.self) { item in
-//            if #available(iOS 17.0, *) {
-//                Chart(items, id: \.self) { item in
-//                    SectorMark(
-//                        angle: .value("number", countItem(item))
-//                    )
-//                    .foregroundStyle(by: .value("item", item))
-//                }
-//                .padding(30)
-//            }
+            Text("全ユーザー数：\(allUsers.count)")
+                .bold()
+                .padding(.vertical)
+            
             Chart {
                 ForEach(items, id: \.self) { item in
                     BarMark(
@@ -48,8 +43,6 @@ struct UserAttributeView: View {
                 }
             }
             .padding(30)
-//                }
-//            }
         }
         .navigationTitle("ユーザー属性")
         .navigationBarTitleDisplayMode(.inline)
@@ -64,6 +57,9 @@ struct UserAttributeView: View {
                 addAllUserItems()
             case .address:
                 self.items = addresses
+                addAllUserItems()
+            case .os:
+                self.items = oses
                 addAllUserItems()
             }
         }
@@ -80,6 +76,8 @@ struct UserAttributeView: View {
                 "年齢"
             case .address:
                 "地域"
+            case .os:
+                "OS"
             }
         }
         
@@ -114,18 +112,21 @@ struct UserAttributeView: View {
         FirebaseManager.shared.firestore
             .collection(FirebaseConstants.users)
             .getDocuments { documentsSnapshot, error in
-            if error != nil {
-                vm.handleNetworkError(error: error, errorMessage: "全ユーザーの取得に失敗しました。")
-                return
-            }
-            
-            documentsSnapshot?.documents.forEach({ snapshot in
-                let data = snapshot.data()
-                // 自分含めてた全てのユーザーを追加する。
-                self.allUsers.append(.init(data: data))
-            })
+                if error != nil {
+                    vm.handleNetworkError(error: error, errorMessage: "全ユーザーの取得に失敗しました。")
+                    return
+                }
+                
+                documentsSnapshot?.documents.forEach({ snapshot in
+                    let data = snapshot.data()
+                    let user = ChatUser(data: data)
+                    // 店舗アカウント以外の全てのユーザーを追加する。
+                    if !user.isStore {
+                        self.allUsers.append(.init(data: data))
+                    }
+                })
                 addAllUserItems()
-        }
+            }
     }
     
     // MARK: - 全ユーザーから取得した項目をひとまとめにする
@@ -139,8 +140,9 @@ struct UserAttributeView: View {
             case .age:
                 self.allUserItems.append(user.age)
             case .address:
-
                 self.allUserItems.append(user.address)
+            case .os:
+                self.allUserItems.append(user.os)
             }
         }
     }

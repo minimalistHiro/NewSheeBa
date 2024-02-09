@@ -46,7 +46,7 @@ final class ViewModel: ObservableObject {
         self.didCompleteLoginProcess = didCompleteLoginProcess
     }
     
-// MARK: - Fetch
+    // MARK: - Fetch
     
     /// 現在ユーザー情報を取得
     /// - Parameters: なし
@@ -59,10 +59,10 @@ final class ViewModel: ObservableObject {
             return
         }
         
-//        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
-//            self.handleError(String.failureFetchUID, error: nil)
-//            return
-//        }
+        //        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
+        //            self.handleError(String.failureFetchUID, error: nil)
+        //            return
+        //        }
         
         FirebaseManager.shared.firestore
             .collection(FirebaseConstants.users)
@@ -83,10 +83,10 @@ final class ViewModel: ObservableObject {
                 }
                 
                 // メールアドレス未認証の場合のエラー
-//                if !currentUser.isConfirmEmail && !currentUser.isStore {
-//                    self.isShowNotConfirmEmailError = true
-//                    try? FirebaseManager.shared.auth.signOut()
-//                }
+                //                if !currentUser.isConfirmEmail && !currentUser.isStore {
+                //                    self.isShowNotConfirmEmailError = true
+                //                    try? FirebaseManager.shared.auth.signOut()
+                //                }
                 // メールアドレス未認証の場合のエラー
                 if !user.isEmailVerified && !currentUser.isStore {
                     self.isShowNotConfirmEmailError = true
@@ -102,7 +102,7 @@ final class ViewModel: ObservableObject {
                 }
                 
                 self.onIndicator = false
-//                print("[CurrentUser]\n \(String(describing: self.currentUser))\n")
+                //                print("[CurrentUser]\n \(String(describing: self.currentUser))\n")
             }
     }
     
@@ -122,7 +122,7 @@ final class ViewModel: ObservableObject {
                     return
                 }
                 self.chatUser = .init(data: data)
-//                print("[ChatUser]\n \(String(describing: self.chatUser))\n")
+                //                print("[ChatUser]\n \(String(describing: self.chatUser))\n")
             }
     }
     
@@ -133,21 +133,21 @@ final class ViewModel: ObservableObject {
         FirebaseManager.shared.firestore
             .collection(FirebaseConstants.users)
             .getDocuments { documentsSnapshot, error in
-            if error != nil {
-                self.handleNetworkError(error: error, errorMessage: String.failureFetchAllUser)
-                return
-            }
-            
-            documentsSnapshot?.documents.forEach({ snapshot in
-                let data = snapshot.data()
-                let user = ChatUser(data: data)
-                
-                // 追加するユーザーが自分以外の場合のみ、追加する。
-                if user.uid != FirebaseManager.shared.auth.currentUser?.uid {
-                    self.allUsers.append(.init(data: data))
+                if error != nil {
+                    self.handleNetworkError(error: error, errorMessage: String.failureFetchAllUser)
+                    return
                 }
-            })
-        }
+                
+                documentsSnapshot?.documents.forEach({ snapshot in
+                    let data = snapshot.data()
+                    let user = ChatUser(data: data)
+                    
+                    // 追加するユーザーが自分以外の場合のみ、追加する。
+                    if user.uid != FirebaseManager.shared.auth.currentUser?.uid {
+                        self.allUsers.append(.init(data: data))
+                    }
+                })
+            }
     }
     
     /// 最新メッセージを取得
@@ -185,7 +185,7 @@ final class ViewModel: ObservableObject {
                         return
                     }
                 })
-//                print("[RecentMessage]\n \(String(describing: self.recentMessages))\n")
+                //                print("[RecentMessage]\n \(String(describing: self.recentMessages))\n")
             }
     }
     
@@ -222,8 +222,8 @@ final class ViewModel: ObservableObject {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     self.isScroll.toggle()
                 }
-//                print("[Message]\n \(String(describing: self.chatMessages))\n")
-//                print("[Message] \n")
+                //                print("[Message]\n \(String(describing: self.chatMessages))\n")
+                //                print("[Message] \n")
             }
     }
     
@@ -246,7 +246,7 @@ final class ViewModel: ObservableObject {
                     return
                 }
                 self.friend = .init(data: data)
-//                print("[Friend]\n \(String(describing: self.friend))\n")
+                //                print("[Friend]\n \(String(describing: self.friend))\n")
             }
     }
     
@@ -279,7 +279,7 @@ final class ViewModel: ObservableObject {
                         }
                     }
                 })
-//                print("[Friend]\n \(String(describing: self.friends))\n")
+                //                print("[Friend]\n \(String(describing: self.friends))\n")
             }
     }
     
@@ -342,21 +342,21 @@ final class ViewModel: ObservableObject {
         FirebaseManager.shared.firestore
             .collection(FirebaseConstants.alerts)
             .getDocuments { documentsSnapshot, error in
-            if error != nil {
-                print("全アラートの取得に失敗しました。")
-                return
-            }
-            
-            documentsSnapshot?.documents.forEach({ snapshot in
-                let data = snapshot.data()
-                let alert = AlertNotification(data: data)
+                if error != nil {
+                    print("全アラートの取得に失敗しました。")
+                    return
+                }
                 
-                self.alertNotification = alert
-            })
-        }
+                documentsSnapshot?.documents.forEach({ snapshot in
+                    let data = snapshot.data()
+                    let alert = AlertNotification(data: data)
+                    
+                    self.alertNotification = alert
+                })
+            }
     }
     
-// MARK: - Handle
+    // MARK: - Handle
     
     /// 新規作成
     /// - Parameters:
@@ -382,10 +382,10 @@ final class ViewModel: ObservableObject {
             return
         }
         // パスワードの文字数が足りない時にエラーを発動。
-//        if password.count < Setting.minPasswordOfDigits {
-//            self.isShowPasswordOfDigitsError = true
-//            return
-//        }
+        //        if password.count < Setting.minPasswordOfDigits {
+        //            self.isShowPasswordOfDigitsError = true
+        //            return
+        //        }
         
         FirebaseManager.shared.auth.createUser(withEmail: email, password: password) { result, error in
             if let error = error as NSError?, let errorCode = AuthErrorCode.Code(rawValue: error.code) {
@@ -525,8 +525,8 @@ final class ViewModel: ObservableObject {
             }
             
             // メールアドレス認証済み処理
-            let data = [FirebaseConstants.isConfirmEmail: true,]
-            self.updateUser(document: user.uid, data: data)
+//            let data = [FirebaseConstants.isConfirmEmail: true,]
+//            self.updateUser(document: user.uid, data: data)
             
             self.onIndicator = false
             self.didCompleteLoginProcess()
@@ -681,7 +681,7 @@ final class ViewModel: ObservableObject {
         self.isShowAlert = true
     }
     
-// MARK: - Persist
+    // MARK: - Persist
     
     /// ユーザー情報を保存
     /// - Parameters:
@@ -700,10 +700,11 @@ final class ViewModel: ObservableObject {
                         FirebaseConstants.username: username == "" ? email : username,
                         FirebaseConstants.age: age,
                         FirebaseConstants.address: address,
-                        FirebaseConstants.isConfirmEmail: false,
+//                        FirebaseConstants.isConfirmEmail: false,
                         FirebaseConstants.isFirstLogin: false,
                         FirebaseConstants.isStore: false,
                         FirebaseConstants.isOwner: false,
+                        FirebaseConstants.os: "iOS",
         ] as [String : Any]
         
         FirebaseManager.shared.firestore
@@ -844,7 +845,7 @@ final class ViewModel: ObservableObject {
         }
     }
     
-// MARK: - Update
+    // MARK: - Update
     
     /// ユーザー情報を更新
     /// - Parameters:
@@ -904,7 +905,7 @@ final class ViewModel: ObservableObject {
         }
     }
     
-// MARK: - Delete
+    // MARK: - Delete
     
     /// ユーザー情報を削除
     /// - Parameters:
@@ -1019,18 +1020,18 @@ final class ViewModel: ObservableObject {
     /// サインイン失敗時のデータ削除
     /// - Parameters: なし
     /// - Returns: なし
-//    func deleteData() {
-//        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
-//        // ユーザー情報削除
-//        deleteUser(document: uid)
-//        // 画像削除
-//        deleteImage(withPath: uid)
-//        // 認証情報削除
-//        deleteAuth()
-//    }
+    //    func deleteData() {
+    //        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
+    //        // ユーザー情報削除
+    //        deleteUser(document: uid)
+    //        // 画像削除
+    //        deleteImage(withPath: uid)
+    //        // 認証情報削除
+    //        deleteAuth()
+    //    }
     
-// MARK: - Other
-
+    // MARK: - Other
+    
     /// QRコードを生成する
     /// - Parameters:
     ///   - inputText: QRコードの生成に使用するテキスト
@@ -1058,8 +1059,8 @@ final class ViewModel: ObservableObject {
         
         return UIImage(cgImage: cgImage)
     }
-
-
+    
+    
     /// Date型を日付のみ取り出す
     /// - Parameters:
     ///   - date: 変換する日付
