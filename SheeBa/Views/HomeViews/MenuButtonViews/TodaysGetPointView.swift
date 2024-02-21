@@ -54,9 +54,9 @@ struct TodaysGetPointView: View {
         }
         .asBackButton()
         .asSingleAlert(title: "",
-                       isShowAlert: $vm.isShowAlert,
+                       isShowAlert: $vm.isShowError,
                        message: vm.alertMessage,
-                       didAction: { vm.isShowAlert = false })
+                       didAction: { vm.isShowError = false })
     }
     
     // MARK: - cardView
@@ -90,12 +90,12 @@ struct TodaysGetPointView: View {
                                         .padding(.trailing, 10)
                                         .foregroundStyle(Color.blue)
                                 } else {
-                                    Image(systemName: "")
+                                    Image(systemName: "checkmark.circle.fill")
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 25)
                                         .padding(.trailing, 10)
-                                        .foregroundStyle(Color.blue)
+                                        .foregroundStyle(Color.white)
                                 }
                                 
                                 // トップ画像
@@ -128,7 +128,7 @@ struct TodaysGetPointView: View {
         }
     }
     
-    /// UIDに一致する店舗ポイント情報を取得
+    // MARK: - 店舗ポイント情報を取得
     /// - Parameters: なし
     /// - Returns: なし
     private func fetchStorePoints() {
@@ -178,7 +178,7 @@ struct TodaysGetPointView: View {
                     let user = ChatUser(data: data)
                     
                     // 追加するユーザーが店舗の場合のみ追加する。
-                    if user.isStore {
+                    if user.isStore, user.isEnableScan {
                         storeUsers.append(.init(data: data))
                     }
                 })

@@ -24,6 +24,7 @@ struct InputText {
     let maxEmailTextFieldCount = 40             // メールアドレス最大文字数
     let maxPhoneNumberTextFieldCount = 11       // 電話番号最大文字数
     let maxUsernameTextFieldCount = 25          // ユーザーネーム最大文字数
+    let maxUrlTextFieldCount = 200              // URL最大文字数
     let maxPasswordTextFieldCount = 30          // パスワード最大文字数
     
     // 通常テキスト
@@ -39,6 +40,8 @@ struct InputText {
                 InputText.shared.maxEmailTextFieldCount
             case .phone:
                 InputText.shared.maxPhoneNumberTextFieldCount
+            case .url:
+                InputText.shared.maxUrlTextFieldCount
             case .other:
                 InputText.shared.maxUsernameTextFieldCount
             }
@@ -47,6 +50,7 @@ struct InputText {
         enum TextType {
             case email
             case phone
+            case url
             case other
             
             var keyboardType: UIKeyboardType {
@@ -55,6 +59,8 @@ struct InputText {
                     return .emailAddress
                 case .phone:
                     return .phonePad
+                case .url:
+                    return .URL
                 case .other:
                     return .default
                 }

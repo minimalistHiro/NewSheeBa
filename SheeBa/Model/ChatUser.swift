@@ -25,6 +25,8 @@ struct ChatUser: Hashable, Identifiable {
     
     // 店舗ユーザーのみ
     let no: Int
+    let isEnableScan: Bool
+    let getPoint: Int
     
     // DBに保存しないデータ
     let ranking: String
@@ -44,8 +46,21 @@ struct ChatUser: Hashable, Identifiable {
         self.os = data[FirebaseConstants.os] as? String ?? "iOS"
         self.no = data[FirebaseConstants.no] as? Int ?? 0
         self.ranking = data[FirebaseConstants.rankign] as? String ?? ""
+        self.isEnableScan = data[FirebaseConstants.isEnableScan] as? Bool ?? false
+        self.getPoint = data[FirebaseConstants.getPoint] as? Int ?? 0
     }
 }
+
+let previewOfChatUser = ChatUser.init(data: [
+    FirebaseConstants.email: "test@gmail.com",
+    FirebaseConstants.uid: "",
+    FirebaseConstants.isStore: true,
+    FirebaseConstants.getPoint: 1,
+    FirebaseConstants.isEnableScan: true,
+    FirebaseConstants.no: 1,
+    FirebaseConstants.profileImageUrl: "",
+    FirebaseConstants.username: "test"
+])
 
 let ages: [String] = [
     "",

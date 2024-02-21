@@ -48,7 +48,7 @@ struct CreateNewMessageView: View {
             vm.fetchCurrentUser()
             vm.fetchRecentMessages()
             vm.fetchFriends()
-            vm.fetchAllUsers()
+            vm.fetchAllUsersOtherThanSelf()
         }
         .searchable(text: $searchText)
         .onSubmit(of: .search) {
@@ -78,7 +78,7 @@ struct CreateNewMessageView: View {
             resultUsers = []
         } else if vm.recentMessages == [] {
             // 最新メッセージが空の場合
-            resultUsers = vm.allUsers.filter { user in
+            resultUsers = vm.allUsersOtherThanSelf.filter { user in
                 // 全ユーザーの中に、既に友達申請しているユーザーは排除する。
                 for friend in vm.friends {
                     if friend.uid == user.uid {
@@ -92,7 +92,7 @@ struct CreateNewMessageView: View {
                 return false
             }
         } else {
-            let filteredUsers = vm.allUsers.filter {
+            let filteredUsers = vm.allUsersOtherThanSelf.filter {
                 // 検索ワードに一致しているーザーネームのみ含める。
                 $0.username.contains(searchText)
             }

@@ -6,16 +6,14 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
 struct AlertNotification: Hashable, Identifiable {
-    var id: String { uid }
-    
-    let uid: String
+    @DocumentID var id: String?
     let title: String
     let text: String
     
     init(data: [String: Any]) {
-        self.uid = data[FirebaseConstants.uid] as? String ?? ""
         self.title = data[FirebaseConstants.title] as? String ?? ""
         self.text = data[FirebaseConstants.text] as? String ?? ""
     }

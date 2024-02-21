@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct HomeView: View {
     
@@ -13,6 +14,7 @@ struct HomeView: View {
     @ObservedObject var userSetting = UserSetting()
     @State private var isShowQRCodeView = false             // QRCodeView表示有無
     @State private var isShowSignOutAlert = false           // 強制サインアウトアラート
+    @State private var isContainNotReadNotification = false // 未読のお知らせの有無
     
     @Binding var isUserCurrentryLoggedOut: Bool
 //    var isStore = false                                     // 店舗アカウントか否か
@@ -40,6 +42,8 @@ struct HomeView: View {
                             .padding(.top, 10)
                         menuButtons
                             .padding(.top, 10)
+                        // TODO: - 第2弾
+//                        advertisements
                     }
                 }
                 // TODO: - 第2弾
@@ -58,6 +62,8 @@ struct HomeView: View {
                     vm.fetchFriends()
                     vm.fetchStorePoints()
                     vm.fetchAlerts()
+                    fetchNotificationsAndSearchNotRead()
+                    vm.fetchAdvertisements()
                 }
             } else {
                 isUserCurrentryLoggedOut = true
@@ -98,6 +104,7 @@ struct HomeView: View {
                 vm.fetchRecentMessages()
                 vm.fetchFriends()
                 vm.fetchStorePoints()
+                fetchNotificationsAndSearchNotRead()
             }
         }
         // TODO: - fullScrrenCover同士がバッティングするとうまく表示されない。
@@ -138,7 +145,29 @@ struct HomeView: View {
                 .frame(width: 100)
                 .padding(.horizontal)
                 .padding(.top, 10)
+            
             Spacer()
+            
+            NavigationLink {
+                NotificationListView()
+            } label: {
+                ZStack(alignment: .topTrailing) {
+                    Image(systemName: "bell")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20)
+                        .foregroundStyle(.black)
+                    .padding()
+                    
+                    if isContainNotReadNotification {
+                        Circle()
+                            .frame(width: 12, height: 12)
+                            .foregroundStyle(.red)
+                            .padding(.trailing, 10)
+                            .padding(.top, 10)
+                    }
+                }
+            }
         }
     }
     
@@ -233,7 +262,7 @@ struct HomeView: View {
                 
                 // ランキングボタン
                 NavigationLink {
-                    RankingView()
+                    RankingView(currentUser: vm.currentUser ?? nil)
                 } label: {
                     MenuButton(imageSystemName: "trophy", text: "ランキング")
                 }
@@ -248,6 +277,51 @@ struct HomeView: View {
                 .foregroundColor(.white)
             }
         }
+    }
+    
+    // MARK: - advertisements
+    private var advertisements: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                ForEach(vm.advertisements, id: \.self) { advertisement in
+                    NavigationLink {
+                        AdvertisementDetailView(advertisement: advertisement)
+                    } label: {
+                        if advertisement.imageUrl != "" {
+                            WebImage(url: URL(string: advertisement.imageUrl))
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 150, height: 150)
+                                .clipShape(RoundedRectangle(cornerSize: CGSize(width: 7, height: 7)))
+                        } else {
+                            RoundedRectangle(cornerSize: CGSize(width: 7, height: 7))
+                                .frame(width: 150, height: 150)
+                                .foregroundStyle(Color(String.chatLogBackground))
+                                .overlay {
+                                    Image(systemName: "photo")
+                                        .font(.system(size: 30))
+                                        .foregroundColor(.black)
+                                }
+                        }
+                    }
+                }
+                if let currentUser = vm.currentUser, currentUser.isOwner {
+                    NavigationLink {
+                        CreateAdvertisementView()
+                    } label: {
+                        RoundedRectangle(cornerSize: CGSize(width: 7, height: 7))
+                            .frame(width: 150, height: 150)
+                            .foregroundStyle(Color.white)
+                            .overlay {
+                                Image(systemName: "plus")
+                                    .font(.system(size: 30))
+                                    .bold()
+                            }
+                    }
+                }
+            }
+        }
+        .padding()
     }
     
     // MARK: - qrCodeButton
@@ -285,6 +359,35 @@ struct HomeView: View {
             }
             .padding()
         }
+    }
+    
+    // MARK: - 全お知らせを取得して未読の有無を確認
+    /// - Parameters: なし
+    /// - Returns: なし
+    func fetchNotificationsAndSearchNotRead() {
+        isContainNotReadNotification = false
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
+        
+        FirebaseManager.shared.firestore
+            .collection(FirebaseConstants.notifications)
+            .document(uid)
+            .collection(FirebaseConstants.notification)
+            .getDocuments { documentsSnapshot, error in
+                if error != nil {
+                    print("全お知らせの取得に失敗しました。")
+                    return
+                }
+                
+                documentsSnapshot?.documents.forEach({ snapshot in
+                    let data = snapshot.data()
+                    let notification = NotificationModel(data: data)
+                    
+                    // 未読があった場合
+                    if !notification.isRead {
+                        isContainNotReadNotification = true
+                    }
+                })
+            }
     }
     
     // MARK: - サインアウト

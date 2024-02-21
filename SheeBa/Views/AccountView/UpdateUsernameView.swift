@@ -99,7 +99,7 @@ struct UpdateUsernameView: View {
         }
     }
     
-    /// ユーザー名を更新
+    // MARK: - ユーザー名を更新
     /// - Parameters:
     ///   - username: 更新するユーザー名
     /// - Returns: なし

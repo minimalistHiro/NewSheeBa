@@ -89,6 +89,10 @@
 		FD1255AE2B73443500724EFD /* TodaysGetPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1255AD2B73443500724EFD /* TodaysGetPointView.swift */; };
 		FD1BFDD92B4A7E780049CC53 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1BFDD82B4A7E780049CC53 /* UIViewExtension.swift */; };
 		FD1BFDDB2B4A7FF70049CC53 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1BFDDA2B4A7FF70049CC53 /* ActivityView.swift */; };
+		FD2DF3202B845DF90019E01D /* CreateAdvertisementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2DF31F2B845DF90019E01D /* CreateAdvertisementView.swift */; };
+		FD2DF3232B846DF70019E01D /* AdvertisementDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2DF3222B846DF70019E01D /* AdvertisementDetailView.swift */; };
+		FD2DF3262B848FEA0019E01D /* StoreInfoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2DF3252B848FEA0019E01D /* StoreInfoListView.swift */; };
+		FD2DF3282B8499520019E01D /* EditStoreInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2DF3272B8499520019E01D /* EditStoreInfoView.swift */; };
 		FD2FA5932B70CBA500580C36 /* QRCodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2FA5922B70CBA500580C36 /* QRCodeScanner.swift */; };
 		FD2FA5952B70CCFD00580C36 /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2FA5942B70CCFD00580C36 /* QRScannerViewController.swift */; };
 		FD38C1552B6A136E00714172 /* AlertNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD38C1542B6A136E00714172 /* AlertNotification.swift */; };
@@ -100,6 +104,11 @@
 		FD4122C22B4823920050F0BC /* ConfirmEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4122C12B4823920050F0BC /* ConfirmEmailView.swift */; };
 		FD4958512B4A26C700FE41EC /* NotConfirmEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4958502B4A26C700FE41EC /* NotConfirmEmailView.swift */; };
 		FD50703D2B4B9A4B008C42E7 /* UpdateImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD50703C2B4B9A4B008C42E7 /* UpdateImageView.swift */; };
+		FDD4B41E2B834942002729A1 /* Advertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD4B41D2B834942002729A1 /* Advertisement.swift */; };
+		FDDF445F2B786E0500156558 /* NotificationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDF445E2B786E0500156558 /* NotificationListView.swift */; };
+		FDDF44622B79FAC200156558 /* CreateNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDF44612B79FAC200156558 /* CreateNotificationView.swift */; };
+		FDDF44652B7B380300156558 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDF44642B7B380300156558 /* NotificationModel.swift */; };
+		FDDF44672B7C7BE200156558 /* NotificationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDF44662B7C7BE200156558 /* NotificationDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -158,6 +167,10 @@
 		FD1255AD2B73443500724EFD /* TodaysGetPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysGetPointView.swift; sourceTree = "<group>"; };
 		FD1BFDD82B4A7E780049CC53 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		FD1BFDDA2B4A7FF70049CC53 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		FD2DF31F2B845DF90019E01D /* CreateAdvertisementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAdvertisementView.swift; sourceTree = "<group>"; };
+		FD2DF3222B846DF70019E01D /* AdvertisementDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementDetailView.swift; sourceTree = "<group>"; };
+		FD2DF3252B848FEA0019E01D /* StoreInfoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreInfoListView.swift; sourceTree = "<group>"; };
+		FD2DF3272B8499520019E01D /* EditStoreInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStoreInfoView.swift; sourceTree = "<group>"; };
 		FD2FA5922B70CBA500580C36 /* QRCodeScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScanner.swift; sourceTree = "<group>"; };
 		FD2FA5942B70CCFD00580C36 /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
 		FD38C1542B6A136E00714172 /* AlertNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertNotification.swift; sourceTree = "<group>"; };
@@ -170,6 +183,11 @@
 		FD4122C12B4823920050F0BC /* ConfirmEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmEmailView.swift; sourceTree = "<group>"; };
 		FD4958502B4A26C700FE41EC /* NotConfirmEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotConfirmEmailView.swift; sourceTree = "<group>"; };
 		FD50703C2B4B9A4B008C42E7 /* UpdateImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateImageView.swift; sourceTree = "<group>"; };
+		FDD4B41D2B834942002729A1 /* Advertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertisement.swift; sourceTree = "<group>"; };
+		FDDF445E2B786E0500156558 /* NotificationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListView.swift; sourceTree = "<group>"; };
+		FDDF44612B79FAC200156558 /* CreateNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNotificationView.swift; sourceTree = "<group>"; };
+		FDDF44642B7B380300156558 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
+		FDDF44662B7C7BE200156558 /* NotificationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,6 +317,8 @@
 				FD058C222B468F0100D4F467 /* Friend.swift */,
 				FD058C242B468F1000D4F467 /* StorePoint.swift */,
 				FD38C1542B6A136E00714172 /* AlertNotification.swift */,
+				FDDF44642B7B380300156558 /* NotificationModel.swift */,
+				FDD4B41D2B834942002729A1 /* Advertisement.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -362,7 +382,9 @@
 			children = (
 				FD1161E12B469021000B0064 /* HomeView.swift */,
 				FD1161E92B46937D000B0064 /* SendPayView.swift */,
+				FDDF44602B79F5B600156558 /* NotificationViews */,
 				FD1255AA2B72192F00724EFD /* MenuButtonViews */,
+				FD2DF3212B846DDA0019E01D /* AdvertisementViews */,
 				FD058BC22B468C7400D4F467 /* StoreViews */,
 				FD3E68772B4D610F00436F0A /* OwnerViews */,
 			);
@@ -387,6 +409,7 @@
 				FD50703C2B4B9A4B008C42E7 /* UpdateImageView.swift */,
 				FD1161F52B4693ED000B0064 /* UpdateUsernameView.swift */,
 				FD1161F72B4693FE000B0064 /* UserAttributeView.swift */,
+				FD2DF3242B848FCA0019E01D /* OwnerViews */,
 			);
 			path = AccountView;
 			sourceTree = "<group>";
@@ -432,10 +455,29 @@
 			path = MenuButtonViews;
 			sourceTree = "<group>";
 		};
+		FD2DF3212B846DDA0019E01D /* AdvertisementViews */ = {
+			isa = PBXGroup;
+			children = (
+				FD2DF3222B846DF70019E01D /* AdvertisementDetailView.swift */,
+			);
+			path = AdvertisementViews;
+			sourceTree = "<group>";
+		};
+		FD2DF3242B848FCA0019E01D /* OwnerViews */ = {
+			isa = PBXGroup;
+			children = (
+				FD2DF3252B848FEA0019E01D /* StoreInfoListView.swift */,
+				FD2DF3272B8499520019E01D /* EditStoreInfoView.swift */,
+			);
+			path = OwnerViews;
+			sourceTree = "<group>";
+		};
 		FD3E68772B4D610F00436F0A /* OwnerViews */ = {
 			isa = PBXGroup;
 			children = (
 				FD3E68782B4D616200436F0A /* QRCodeView.swift */,
+				FDDF44612B79FAC200156558 /* CreateNotificationView.swift */,
+				FD2DF31F2B845DF90019E01D /* CreateAdvertisementView.swift */,
 			);
 			path = OwnerViews;
 			sourceTree = "<group>";
@@ -451,6 +493,15 @@
 				FD1161EB2B46938C000B0064 /* QRCodeAndCameraView.swift */,
 			);
 			path = Trash;
+			sourceTree = "<group>";
+		};
+		FDDF44602B79F5B600156558 /* NotificationViews */ = {
+			isa = PBXGroup;
+			children = (
+				FDDF445E2B786E0500156558 /* NotificationListView.swift */,
+				FDDF44662B7C7BE200156558 /* NotificationDetailView.swift */,
+			);
+			path = NotificationViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -561,12 +612,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD058C072B468DA100D4F467 /* AlertBackButtonModifier.swift in Sources */,
+				FD2DF3232B846DF70019E01D /* AdvertisementDetailView.swift in Sources */,
 				FD38C1552B6A136E00714172 /* AlertNotification.swift in Sources */,
 				FD1255AE2B73443500724EFD /* TodaysGetPointView.swift in Sources */,
+				FD2DF3262B848FEA0019E01D /* StoreInfoListView.swift in Sources */,
 				FD1161F62B4693ED000B0064 /* UpdateUsernameView.swift in Sources */,
 				FD058BA82B468ACE00D4F467 /* ContentView.swift in Sources */,
 				FD1161E82B46936D000B0064 /* ChatLogView.swift in Sources */,
 				FD058C1D2B468EC400D4F467 /* FirebaseConstants.swift in Sources */,
+				FDDF445F2B786E0500156558 /* NotificationListView.swift in Sources */,
 				FD1161FC2B469461000B0064 /* CustomCapsule.swift in Sources */,
 				FD1162042B4694AD000B0064 /* Indicator.swift in Sources */,
 				FD1161E22B469021000B0064 /* HomeView.swift in Sources */,
@@ -575,10 +629,12 @@
 				FD1161DA2B468FD4000B0064 /* SetUpPasswordView.swift in Sources */,
 				FD058C012B468D5E00D4F467 /* Setting.swift in Sources */,
 				FD1161D62B468FB6000B0064 /* SetUpUsernameView.swift in Sources */,
+				FDDF44672B7C7BE200156558 /* NotificationDetailView.swift in Sources */,
 				FD1161EE2B4693A6000B0064 /* GetPointView.swift in Sources */,
 				FD1162022B46949D000B0064 /* ImagePicker.swift in Sources */,
 				FD058C0F2B468DEF00D4F467 /* ViewExtension.swift in Sources */,
 				FD058C232B468F0100D4F467 /* Friend.swift in Sources */,
+				FDDF44652B7B380300156558 /* NotificationModel.swift in Sources */,
 				FD1161FE2B469470000B0064 /* InputText.swift in Sources */,
 				FD1161F22B4693C9000B0064 /* CameraView.swift in Sources */,
 				FD058C092B468DB900D4F467 /* SingleAlertModifier.swift in Sources */,
@@ -609,11 +665,14 @@
 				FD50703D2B4B9A4B008C42E7 /* UpdateImageView.swift in Sources */,
 				FD1BFDDB2B4A7FF70049CC53 /* ActivityView.swift in Sources */,
 				FD4122C02B47C8E90050F0BC /* SMSAuthView.swift in Sources */,
+				FD2DF3282B8499520019E01D /* EditStoreInfoView.swift in Sources */,
 				FD1161DC2B468FE9000B0064 /* LoginView.swift in Sources */,
+				FDD4B41E2B834942002729A1 /* Advertisement.swift in Sources */,
 				FD058C052B468D8F00D4F467 /* CloseButtonModifier.swift in Sources */,
 				FD058C272B468F4700D4F467 /* TutorialView.swift in Sources */,
 				FD058C152B468E5000D4F467 /* StringExtension.swift in Sources */,
 				FD1162002B46947F000B0064 /* MessageView.swift in Sources */,
+				FDDF44622B79FAC200156558 /* CreateNotificationView.swift in Sources */,
 				FD058C252B468F1000D4F467 /* StorePoint.swift in Sources */,
 				FD1161E02B469007000B0064 /* ResetPasswordView.swift in Sources */,
 				FD1161F82B4693FE000B0064 /* UserAttributeView.swift in Sources */,
@@ -621,6 +680,7 @@
 				FD4122BE2B47C6CD0050F0BC /* SetUpPhoneView.swift in Sources */,
 				FD1161E42B46903A000B0064 /* MoneyTransferView.swift in Sources */,
 				FD058C132B468E3B00D4F467 /* UIImageExtension.swift in Sources */,
+				FD2DF3202B845DF90019E01D /* CreateAdvertisementView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -753,7 +813,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SheeBa/SheeBa.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"SheeBa/Preview Content\"";
 				DEVELOPMENT_TEAM = T9U9A227FB;
 				ENABLE_PREVIEWS = YES;
@@ -772,7 +832,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hiroki.SheeBa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -791,7 +851,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SheeBa/SheeBa.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"SheeBa/Preview Content\"";
 				DEVELOPMENT_TEAM = T9U9A227FB;
 				ENABLE_PREVIEWS = YES;
@@ -810,7 +870,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hiroki.SheeBa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -11,7 +11,9 @@ struct RankingView: View {
     
     @ObservedObject var vm = ViewModel()
     @State private var users = [ChatUser]()             // 全ユーザー
-    @State private var rankMoneyUsers = [ChatUser]()    // 取得ポイント数上位5位までのユーザー
+    @State private var rankMoneyUsers = [ChatUser]()    // ランキング表示ユーザー
+    @State private var ranking = Setting.rankingCount   // ランキング数
+    let currentUser: ChatUser?                          // 現在のユーザー
     
     var body: some View {
         NavigationStack {
@@ -27,15 +29,15 @@ struct RankingView: View {
         .navigationTitle("ランキング")
         .onAppear {
             if FirebaseManager.shared.auth.currentUser?.uid != nil {
-                vm.fetchCurrentUser()
+//                vm.fetchCurrentUser()
                 fetchAllUsersOrderByMoney()
             }
         }
         .asBackButton()
         .asSingleAlert(title: "",
-                       isShowAlert: $vm.isShowAlert,
+                       isShowAlert: $vm.isShowError,
                        message: vm.alertMessage,
-                       didAction: { vm.isShowAlert = false })
+                       didAction: { vm.isShowError = false })
     }
     
     // MARK: - cardView
@@ -106,6 +108,11 @@ struct RankingView: View {
     /// - Parameters: なし
     /// - Returns: なし
     private func fetchAllUsersOrderByMoney() {
+        // オーナーアカウントの場合、ランキング表示数を変える。
+        if let currentUser = currentUser, currentUser.isOwner {
+            ranking = Setting.ownerRankingCount
+        }
+        
         FirebaseManager.shared.firestore
             .collection(FirebaseConstants.users)
             .order(by: FirebaseConstants.money, descending: true)
@@ -134,13 +141,13 @@ struct RankingView: View {
                 // 上位5位までのユーザーを取得する。
                 for user in sortUsers {
                     if let money = Int(user.money), !user.isOwner {
-                        // 5位以内であれば、ランキングに加える
-                        if count < 5  {
+                        // 表示順位以内であれば、ランキングに加える
+                        if count < ranking  {
                             // ポイント数に変更があったら、順位を一つ変えるためカウント数を一つ加える。
                             if money != previousMoney {
                                 count += 1
                             }
-                            // データを上位5位までのユーザーに追加する。
+                            // データを追加する。
                             let data = [
                                 FirebaseConstants.username: user.username,
                                 FirebaseConstants.profileImageUrl: user.profileImageUrl,
@@ -158,5 +165,5 @@ struct RankingView: View {
 }
 
 #Preview {
-    RankingView()
+    RankingView(currentUser: nil)
 }

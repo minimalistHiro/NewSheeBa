@@ -203,10 +203,17 @@ struct CameraView: View {
                             // 店舗ポイント情報が以前に一度も取得していなかった場合
                             guard let data = snapshot?.data() else {
                                 if chatUser.isStore {
-                                    // 店舗ポイントアカウントの場合、ポイントを獲得
-                                    handleGetPointFromStore(chatUser: chatUser)
-                                    self.isShowGetPointView = true
-                                    return
+                                    // スキャンが可能であるか否か
+                                    if chatUser.isEnableScan {
+                                        // 店舗ポイントアカウントの場合、ポイントを獲得
+                                        handleGetPointFromStore(chatUser: chatUser)
+                                        self.isShowGetPointView = true
+                                        return
+                                    } else {
+                                        isQrCodeScanError = true
+                                        self.isShowGetPointView = true
+                                        return
+                                    }
                                 } else {
                                     // 店舗ポイントアカウント以外の場合、送ポイント画面を表示
                                     self.isShowSendPayView = true
@@ -231,19 +238,26 @@ struct CameraView: View {
     private func divideScanProcess(chatUser: ChatUser) {
         // 店舗ポイントアカウントの場合
         if chatUser.isStore {
-            // 店舗ポイント情報がある場合は場合分け、ない場合はポイントを獲得する。
-            if let storePoint = vm.storePoint {
-                // 店舗QRコードが同日に2度以上のスキャンでない場合
-                if storePoint.date != vm.dateFormat(Date()) {
-                    handleGetPointFromStore(chatUser: chatUser)
-                    self.isShowGetPointView = true
+            // スキャンが可能であるか否か
+            if chatUser.isEnableScan {
+                // 店舗ポイント情報がある場合は場合分け、ない場合はポイントを獲得する。
+                if let storePoint = vm.storePoint {
+                    // 店舗QRコードが同日に2度以上のスキャンでない場合
+                    if storePoint.date != vm.dateFormat(Date()) {
+                        handleGetPointFromStore(chatUser: chatUser)
+                        self.isShowGetPointView = true
+                    } else {
+                        isSameStoreScanError = true
+                        self.isShowGetPointView = true
+                    }
                 } else {
-                    isSameStoreScanError = true
+                    handleGetPointFromStore(chatUser: chatUser)
                     self.isShowGetPointView = true
                 }
             } else {
-                handleGetPointFromStore(chatUser: chatUser)
+                isQrCodeScanError = true
                 self.isShowGetPointView = true
+                return
             }
         } else {
             // 店舗ポイントアカウント以外の場合、送ポイント画面を表示
@@ -256,7 +270,7 @@ struct CameraView: View {
     /// - Returns: なし
     private func handleGetPointFromStore(chatUser: ChatUser) {
         guard let currentUser = vm.currentUser else { return }
-        getPoint = Setting.getPointFromStore
+        getPoint = String(chatUser.getPoint)
         
         guard let currentUserMoney = Int(currentUser.money),
               let intGetPoint = Int(getPoint) else {

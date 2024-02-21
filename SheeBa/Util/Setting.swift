@@ -14,9 +14,12 @@ final class Setting {
     // MARK: - キャンペーン値
     static let newRegistrationBenefits: String = "20"           // 新規登録特典。プレゼントポイント
     static let getPointFromStore: String = "1"                  // 店舗からの取得ポイント
+    static let rankingCount: Int = 10                           // ランキング表示ユーザー
+    static let ownerRankingCount: Int = 30                      // オーナーアカウントランキング表示ユーザー
     
     // MARK: - URL
     static let privacyPolicyURL: String = "https://www.shibaginzadori.com/?page_id=1070"// プライバシーポリシーURL
+    static let officialSiteURL: String = "https://www.shibaginzadori.com/?p=970"        // 公式サイトURL
     
     // MARK: - 各種設定
     // SendPayView

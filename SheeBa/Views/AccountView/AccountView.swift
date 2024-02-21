@@ -12,13 +12,19 @@ struct AccountView: View {
     
     @ObservedObject var vm = ViewModel()
     @ObservedObject var userSetting = UserSetting()
-    @State private var isShowPrivacyPolicyAlert = false                 // プライバシーポリシー表示確認アラート
+    @State private var externalLink: ExternalLink = .officialSite
+    @State private var isShowOpenExternalLinkAlert = false              // 外部リンク表示確認アラート
     @State private var isShowConfirmationSignOutAlert = false           // サインアウト確認アラート
     @State private var isShowConfirmationWithdrawalAlert = false        // 退会確認アラート
     @State private var isShowSuccessWithdrawalAlert = false             // 退会成功アラート
     @State private var isShowSignOutAlert = false                       // 強制サインアウトアラート
     
     @Binding var isUserCurrentryLoggedOut: Bool
+    
+    enum ExternalLink {
+        case officialSite
+        case privacyPolicy
+    }
 //    init() {
 //        vm.isUserCurrentryLoggedOut = FirebaseManager.shared.auth.currentUser?.uid == nil
 //        if FirebaseManager.shared.auth.currentUser?.uid != nil {
@@ -84,43 +90,6 @@ struct AccountView: View {
                             Spacer()
                         }
                     }
-//            HStack {
-//                VStack {
-//                    // トップ画像
-//                    NavigationLink {
-//                        UpdateImageView()
-//                    } label: {
-//                        if let image = vm.currentUser?.profileImageUrl, image != "" {
-//                            Icon.CustomWebImage(imageSize: .large, image: image)
-//                                .overlay {
-//                                    Icon.CustomImageChangeCircle(imageSize: .large)
-//                                }
-//                                .padding(.top, 20)
-//                        } else {
-//                            Icon.CustomCircle(imageSize: .large)
-//                                .overlay {
-//                                    Icon.CustomImageChangeCircle(imageSize: .large)
-//                                }
-//                                .padding(.top, 20)
-//                        }
-//                    }
-//                    
-//                    Text(vm.currentUser?.username ?? "しば太郎")
-//                        .font(.title3)
-//                        .bold()
-//                        .dynamicTypeSize(.medium)
-//                        .padding()
-//                    
-//                    Text("しばID : " + (vm.currentUser?.id ?? ""))
-//                        .font(.caption)
-//                        .dynamicTypeSize(.medium)
-//                        .padding(.bottom, 60)
-//                }
-//                
-//                Spacer()
-//            }
-//            .background(Color(String.yellow))
-            
             Text("設定")
                 .font(.callout)
                 .bold()
@@ -157,14 +126,37 @@ struct AccountView: View {
                     }
                 }
                 
+                if let currentUser = vm.currentUser, currentUser.isOwner {
+                    // 店舗管理
+                    NavigationLink {
+                        StoreInfoListView()
+                    } label: {
+                        HStack {
+                            Text("店舗管理")
+                                .dynamicTypeSize(.medium)
+                            Spacer()
+                        }
+                    }
+                }
+                
                 // 残高表示
                 Toggle(isOn: $userSetting.isShowPoint, label: {
                     Text("ポイントを表示する")
                 })
                 
+                // 公式サイト
+                Button {
+                    externalLink = .officialSite
+                    isShowOpenExternalLinkAlert = true
+                } label: {
+                    Text("公式サイト")
+                        .foregroundColor(.black)
+                }
+                
                 // プライバシーポリシー
                 Button {
-                    isShowPrivacyPolicyAlert = true
+                    externalLink = .privacyPolicy
+                    isShowOpenExternalLinkAlert = true
                 } label: {
                     Text("プライバシーポリシー")
                         .foregroundColor(.black)
@@ -201,14 +193,19 @@ struct AccountView: View {
             }
         }
         .asDoubleAlert(title: "",
-                       isShowAlert: $isShowPrivacyPolicyAlert,
+                       isShowAlert: $isShowOpenExternalLinkAlert,
                        message: String.jumpToExternalLink,
                        buttonText: "はい",
                        didAction: {
             DispatchQueue.main.async {
-                isShowPrivacyPolicyAlert = false
+                isShowOpenExternalLinkAlert = false
             }
-            UIApplication.shared.open(URL(string: Setting.privacyPolicyURL)!)
+            switch externalLink {
+            case .officialSite:
+                UIApplication.shared.open(URL(string: Setting.officialSiteURL)!)
+            case .privacyPolicy:
+                UIApplication.shared.open(URL(string: Setting.privacyPolicyURL)!)
+            }
         })
         .asDestructiveAlert(title: "",
                             isShowAlert: $isShowConfirmationSignOutAlert,

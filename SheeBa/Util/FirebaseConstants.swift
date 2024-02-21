@@ -23,6 +23,7 @@ struct FirebaseConstants {
     static let isOwner = "isOwner"
     static let os = "os"
     static let no = "no"
+    static let isEnableScan = "isEnableScan"
     
     // messages
     static let messages = "messages"
@@ -50,6 +51,16 @@ struct FirebaseConstants {
     // alerts
     static let alerts = "alerts"
     static let title = "title"
+    
+    // Notifications
+    static let notifications = "notifications"
+    static let notification = "notification"
+    static let isRead = "isRead"
+    static let imageUrl = "imageUrl"
+    
+    // Advertisement
+    static let advertisements = "advertisements"
+    static let url = "url"
     
     // DBに保存しないデータ
     static let rankign = "rankign"

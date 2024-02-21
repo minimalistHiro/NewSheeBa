@@ -13,7 +13,7 @@ struct UpdateImageView: View {
     @ObservedObject var vm = ViewModel()
     @State private var isShowImagePicker = false            // ImagePicker表示有無
     @State private var isShowChangeSuccessAlert = false     // 変更成功アラート
-    @State private var uiImage: UIImage?                      // トップ画像
+    @State private var uiImage: UIImage?                    // トップ画像
     
     // ボタンの有効性
     var disabled: Bool {

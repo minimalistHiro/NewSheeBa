@@ -62,6 +62,8 @@ extension String {
     static let failureDeleteRecentMessage = "最新メッセージの削除に失敗しました。"
     static let failureDeleteFriend = "友達情報の削除に失敗しました。"
     static let failureDeleteStorePoint = "店舗ポイント情報の削除に失敗しました。"
+    static let failureDeleteNotification = "お知らせの削除に失敗しました。"
+    static let failureDeleteAdvertisement = "広告の削除に失敗しました。"
     static let failureDeleteImage = "画像の削除に失敗しました。"
     static let failureDeleteAuth = "認証情報の削除に失敗しました。"
     static let jumpToExternalLink = "外部リンクに飛びます。よろしいですか？"

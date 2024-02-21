@@ -16,7 +16,8 @@ final class ViewModel: ObservableObject {
     
     @Published var currentUser: ChatUser?                       // 現在のユーザー
     @Published var chatUser: ChatUser?                          // トーク相手ユーザー
-    @Published var allUsers = [ChatUser]()                      // 全ユーザー
+    @Published var allUsersOtherThanSelf = [ChatUser]()         // 全ユーザー(自分以外)
+    @Published var allUsersContainSelf = [ChatUser]()           // 全ユーザー(自分含める)
     @Published var recentMessages = [RecentMessage]()           // 全最新メッセージ
     @Published var chatMessages = [ChatMessage]()               // 全メッセージ
     @Published var friend: Friend?                              // 特定の友達情報
@@ -24,6 +25,8 @@ final class ViewModel: ObservableObject {
     @Published var storePoint: StorePoint?                      // 特定の店舗ポイント情報
     @Published var storePoints = [StorePoint]()                 // 全店舗ポイント情報
     @Published var alertNotification: AlertNotification?        // 速報
+    @Published var notifications = [NotificationModel]()        // 全お知らせ
+    @Published var advertisements = [Advertisement]()           // 全広告
     
     @Published var errorMessage = ""                            // エラーメッセージ
     @Published var isShowError = false                          // エラー表示有無
@@ -126,10 +129,10 @@ final class ViewModel: ObservableObject {
             }
     }
     
-    /// 全ユーザーを取得
+    /// 全ユーザーを取得（自分以外）
     /// - Parameters: なし
     /// - Returns: なし
-    func fetchAllUsers() {
+    func fetchAllUsersOtherThanSelf() {
         FirebaseManager.shared.firestore
             .collection(FirebaseConstants.users)
             .getDocuments { documentsSnapshot, error in
@@ -142,9 +145,33 @@ final class ViewModel: ObservableObject {
                     let data = snapshot.data()
                     let user = ChatUser(data: data)
                     
-                    // 追加するユーザーが自分以外の場合のみ、追加する。
-                    if user.uid != FirebaseManager.shared.auth.currentUser?.uid {
-                        self.allUsers.append(.init(data: data))
+                    // 追加するユーザーが自分以外、且つ店舗ユーザーでない場合のみ、追加する。
+                    if user.uid != FirebaseManager.shared.auth.currentUser?.uid && !user.isStore {
+                        self.allUsersOtherThanSelf.append(.init(data: data))
+                    }
+                })
+            }
+    }
+    
+    /// 全ユーザーを取得（自分を含める）
+    /// - Parameters: なし
+    /// - Returns: なし
+    func fetchAllUsersContainSelf() {
+        FirebaseManager.shared.firestore
+            .collection(FirebaseConstants.users)
+            .getDocuments { documentsSnapshot, error in
+                if error != nil {
+                    self.handleNetworkError(error: error, errorMessage: String.failureFetchAllUser)
+                    return
+                }
+                
+                documentsSnapshot?.documents.forEach({ snapshot in
+                    let data = snapshot.data()
+                    let user = ChatUser(data: data)
+                    
+                    // 追加するユーザーが店舗ユーザーでない場合のみ、追加する。
+                    if !user.isStore {
+                        self.allUsersContainSelf.append(.init(data: data))
                     }
                 })
             }
@@ -303,7 +330,7 @@ final class ViewModel: ObservableObject {
             }
     }
     
-    /// UIDに一致する店舗ポイント情報を取得
+    /// 全店舗ポイント情報を取得
     /// - Parameters: なし
     /// - Returns: なし
     func fetchStorePoints() {
@@ -352,6 +379,53 @@ final class ViewModel: ObservableObject {
                     let alert = AlertNotification(data: data)
                     
                     self.alertNotification = alert
+                })
+            }
+    }
+    
+    /// 全お知らせを取得
+    /// - Parameters: なし
+    /// - Returns: なし
+    func fetchNotifications() {
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
+        self.notifications.removeAll()
+        
+        FirebaseManager.shared.firestore
+            .collection(FirebaseConstants.notifications)
+            .document(uid)
+            .collection(FirebaseConstants.notification)
+            .order(by: FirebaseConstants.timestamp, descending: true)
+            .getDocuments { documentsSnapshot, error in
+                if error != nil {
+                    print("全お知らせの取得に失敗しました。")
+                    return
+                }
+                
+                documentsSnapshot?.documents.forEach({ snapshot in
+                    let data = snapshot.data()
+                    self.notifications.append(.init(data: data))
+                })
+            }
+    }
+    
+    /// 全広告を取得
+    /// - Parameters: なし
+    /// - Returns: なし
+    func fetchAdvertisements() {
+        self.advertisements.removeAll()
+        
+        FirebaseManager.shared.firestore
+            .collection(FirebaseConstants.advertisements)
+            .order(by: FirebaseConstants.timestamp, descending: true)
+            .getDocuments { documentsSnapshot, error in
+                if error != nil {
+                    print("全広告の取得に失敗しました。")
+                    return
+                }
+                
+                documentsSnapshot?.documents.forEach({ snapshot in
+                    let data = snapshot.data()
+                    self.advertisements.append(.init(data: data))
                 })
             }
     }
@@ -845,6 +919,45 @@ final class ViewModel: ObservableObject {
         }
     }
     
+    /// お知らせを保存
+    /// - Parameters:
+    ///   - document1: ドキュメント1
+    ///   - document2: ドキュメント2
+    ///   - data: データ
+    /// - Returns: なし
+    func persistNotification(document1: String, document2: String, data: [String: Any]) {
+        let document = FirebaseManager.shared.firestore
+            .collection(FirebaseConstants.notifications)
+            .document(document1)
+            .collection(FirebaseConstants.notification)
+            .document(document2)
+        
+        document.setData(data) { error in
+            if error != nil {
+                self.handleError("お知らせの保存に失敗しました。", error: error)
+                return
+            }
+        }
+    }
+    
+    /// 広告を保存
+    /// - Parameters:
+    ///   - document: ドキュメント
+    ///   - data: データ
+    /// - Returns: なし
+    func persistAdvertisement(document: String, data: [String: Any]) {
+        let document = FirebaseManager.shared.firestore
+            .collection(FirebaseConstants.advertisements)
+            .document(document)
+        
+        document.setData(data) { error in
+            if error != nil {
+                self.handleError("広告の保存に失敗しました。", error: error)
+                return
+            }
+        }
+    }
+    
     // MARK: - Update
     
     /// ユーザー情報を更新
@@ -892,6 +1005,23 @@ final class ViewModel: ObservableObject {
             .document(document2)
             .updateData(data as [AnyHashable : Any]) { error in
                 self.handleNetworkError(error: error, errorMessage: "ユーザー情報の更新に失敗しました。")
+            }
+    }
+    
+    /// お知らせを更新
+    /// - Parameters:
+    ///   - document1: ドキュメント1
+    ///   - document2: ドキュメント2
+    ///   - data: データ
+    /// - Returns: なし
+    func updateNotification(document1: String, document2: String, data: [String: Any]) {
+        FirebaseManager.shared.firestore
+            .collection(FirebaseConstants.notifications)
+            .document(document1)
+            .collection(FirebaseConstants.notification)
+            .document(document2)
+            .updateData(data as [AnyHashable : Any]) { error in
+                self.handleNetworkError(error: error, errorMessage: "お知らせの更新に失敗しました。")
             }
     }
     
@@ -992,6 +1122,35 @@ final class ViewModel: ObservableObject {
             }
     }
     
+    /// お知らせを削除
+    /// - Parameters:
+    ///   - document1: ドキュメント1
+    ///   - document2: ドキュメント2
+    /// - Returns: なし
+    func deleteNotification(document1: String, document2: String) {
+        FirebaseManager.shared.firestore
+            .collection(FirebaseConstants.notifications)
+            .document(document1)
+            .collection(FirebaseConstants.notification)
+            .document(document2)
+            .delete { error in
+                self.handleNetworkError(error: error, errorMessage: String.failureDeleteNotification)
+            }
+    }
+    
+    /// 広告を削除
+    /// - Parameters:
+    ///   - document: ドキュメント
+    /// - Returns: なし
+    func deleteAdvertisement(document: String) {
+        FirebaseManager.shared.firestore
+            .collection(FirebaseConstants.advertisements)
+            .document(document)
+            .delete { error in
+                self.handleNetworkError(error: error, errorMessage: String.failureDeleteAdvertisement)
+            }
+    }
+    
     /// 画像を削除
     /// - Parameters:
     ///   - withPath: 削除するパス
@@ -1070,6 +1229,18 @@ final class ViewModel: ObservableObject {
         formatter.locale = Locale(identifier: "ja_JP")
         formatter.dateStyle = .long
         formatter.timeStyle = .none
+        return formatter.string(from: date)
+    }
+    
+    /// Date型を時刻のみ取り出す
+    /// - Parameters:
+    ///   - date: 変換する日付
+    /// - Returns: 時刻のみのDate
+    func hourFormat(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ja_JP")
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
         return formatter.string(from: date)
     }
 }
