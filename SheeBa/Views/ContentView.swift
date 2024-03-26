@@ -13,6 +13,7 @@ struct ContentView: View {
     
     @ObservedObject var vm = ViewModel()
     @State private var selectedTab = 1                      // 選択されたタブ
+    @State private var notificationBadgeCount = 0           // お知らせ通知バッジカウント
     @State private var isUserCurrentryLoggedOut = false     // ユーザーのログインの有無
     
     init() {
@@ -21,6 +22,12 @@ struct ContentView: View {
 //            vm.fetchCurrentUser()
 //            vm.fetchRecentMessages()
 //        }
+        // バッジ
+//        UNUserNotificationCenter.current().requestAuthorization(options: .badge) { (granted, err) in
+//        }
+//        
+//        let application = UIApplication.shared
+//        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
     var body: some View {
@@ -31,20 +38,30 @@ struct ContentView: View {
                         Label("ホーム", systemImage: "house")
                     }
                     .tag(1)
-                CameraView(isUserCurrentryLoggedOut: $isUserCurrentryLoggedOut)
+                MapView(latitude: 200.0, longitude: 200.0)
+                    .tabItem {
+                        Label("マップ", systemImage: "map")
+                    }
                     .tag(2)
+                CameraView(isUserCurrentryLoggedOut: $isUserCurrentryLoggedOut)
+                    .tag(3)
+                MapView(latitude: 200.0, longitude: 200.0)
+                    .tabItem {
+                        Label("マップ", systemImage: "map")
+                    }
+                    .tag(4)
                 AccountView(isUserCurrentryLoggedOut: $isUserCurrentryLoggedOut)
                     .tabItem {
                         Label("アカウント", systemImage: "person.fill")
                     }
-                    .tag(3)
+                    .tag(5)
             }
             .padding(.bottom, 5)
             .overlay {
                 VStack {
                     Spacer()
                     Button {
-                        selectedTab = 2
+                        selectedTab = 3
                     } label: {
                         Circle()
                             .frame(width: 60)

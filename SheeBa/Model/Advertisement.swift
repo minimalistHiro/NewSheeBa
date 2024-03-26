@@ -14,6 +14,7 @@ struct Advertisement: Hashable, Identifiable {
     let text: String
     let url: String
     let imageUrl: String
+    // TODO: - Timestamp型に変える
     let timestamp: Date
     
     init(data: [String: Any]) {

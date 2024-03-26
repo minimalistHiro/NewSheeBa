@@ -12,6 +12,7 @@ struct NotificationDetailView: View {
     
     @Environment(\.dismiss) var dismiss
     @ObservedObject var vm = ViewModel()
+    @ObservedObject var userSetting = UserSetting()
     @State private var isShowDeleteNotificationAlert = false            // お知らせ削除アラート
     @State private var isShowDeleteSuccessAlert = false                 // お知らせ削除成功アラート
     let notification: NotificationModel
@@ -24,7 +25,9 @@ struct NotificationDetailView: View {
                     .bold()
                     .padding(.bottom)
                 
-                Text("\(vm.dateFormat(notification.timestamp)) \(vm.hourFormat(notification.timestamp))")
+                Text("\(vm.dateFormat(notification.timestamp.dateValue())) \(vm.hourFormat(notification.timestamp.dateValue()))")
+                    .padding(.horizontal)
+                    .frame(width: UIScreen.main.bounds.width, alignment: .leading)
                     .font(.caption)
                     .foregroundStyle(.gray)
                     .padding(.bottom)
@@ -78,6 +81,12 @@ struct NotificationDetailView: View {
                 vm.fetchAllUsersContainSelf()
             }
             updateNotification()
+            
+            // 未読の場合、通知バッジを一つ減らす
+            if !notification.isRead {
+                userSetting.badgeCount -= 1
+                UIApplication.shared.applicationIconBadgeNumber = userSetting.badgeCount
+            }
         }
         .navigationTitle("お知らせ")
         .navigationBarTitleDisplayMode(.inline)

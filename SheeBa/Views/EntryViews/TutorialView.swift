@@ -26,6 +26,7 @@ struct TutorialView: View {
                 TabView(selection: $selectedTab) {
                     ForEach(pages, id: \.self) { page in
                         Tutorial(text: String.tutorialText(page: page),
+                                 image: String.tutorialImage(page: page),
                                  lastPage: pages.count,
                                  selectedTab: $selectedTab,
                                  didAction: didCompleteTutorialProcess)
@@ -60,6 +61,7 @@ struct TutorialView: View {
 struct Tutorial: View {
     
     let text: String
+    let image: String
     let lastPage: Int
     @Binding var selectedTab: Int
     let didAction: () -> ()
@@ -137,14 +139,14 @@ struct Tutorial: View {
                     Spacer()
                 }
                 
-    //            Image(systemName: "iphone")
-    //                .resizable()
-    //                .scaledToFill()
-    //                .frame(width: 180, height: 180)
+                if selectedTab != lastPage {
+                    Image(image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 180, height: 180)
+                }
                 
                 if selectedTab != lastPage {
-                    Spacer()
-                    
                     Text(text)
                         .multilineTextAlignment(.center)
                         .lineSpacing(10)

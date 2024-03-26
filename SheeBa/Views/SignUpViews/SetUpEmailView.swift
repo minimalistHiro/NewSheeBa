@@ -32,13 +32,6 @@ struct SetUpEmailView: View {
     // ボタンの有効性
     var disabled: Bool {
         self.email.isEmpty || self.password.isEmpty || self.password2.isEmpty
-//        if !password.isEmpty && !email.isEmpty {
-//            // パスワードが入力済みで、確認用パスワードと一致していた場合のみ押下可能。
-//            if password == password2 {
-//                return false
-//            }
-//        }
-//        return true
     }
     
     init(username: Binding<String>,

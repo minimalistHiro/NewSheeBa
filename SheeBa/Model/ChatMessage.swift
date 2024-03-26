@@ -14,5 +14,6 @@ struct ChatMessage: Equatable, Codable, Identifiable {
     let toId: String
     let text: String
     let isSendPay: Bool
+    // TODO: - Timestamp型に変える
     let timestamp: Date
 }

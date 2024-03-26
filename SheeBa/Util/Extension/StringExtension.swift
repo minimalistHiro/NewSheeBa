@@ -37,6 +37,20 @@ extension String {
             return ""
         }
     }
+    static func tutorialImage(page: Int) -> String {
+        switch page {
+        case 1:
+            return "Greeting"
+        case 2:
+            return ""
+        case 3:
+            return ""
+        case 4:
+            return ""
+        default :
+            return ""
+        }
+    }
     
     // UserDefault
     static let authVerificationID = "authVerificationID"

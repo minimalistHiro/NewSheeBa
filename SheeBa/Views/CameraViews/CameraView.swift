@@ -6,11 +6,11 @@
 //
 
 import SwiftUI
-//import CodeScanner
 
 struct CameraView: View {
     
     @Environment(\.dismiss) var dismiss
+    let sounds = Sounds()
     @ObservedObject var vm = ViewModel()
     @State private var isShowSendPayView = false        // SendPayViewの表示有無
     @State private var isShowGetPointView = false       // GetPointViewの表示有無
@@ -269,6 +269,10 @@ struct CameraView: View {
     /// - Parameters: なし
     /// - Returns: なし
     private func handleGetPointFromStore(chatUser: ChatUser) {
+        // メェーの音を鳴らす
+        // TODO: - 第2弾
+        sounds.playSound()
+        
         guard let currentUser = vm.currentUser else { return }
         getPoint = String(chatUser.getPoint)
         

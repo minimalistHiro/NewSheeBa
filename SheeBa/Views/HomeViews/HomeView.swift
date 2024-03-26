@@ -17,7 +17,6 @@ struct HomeView: View {
     @State private var isContainNotReadNotification = false // 未読のお知らせの有無
     
     @Binding var isUserCurrentryLoggedOut: Bool
-//    var isStore = false                                     // 店舗アカウントか否か
     
 //    init(isUserCurrentryLoggedOut: Binding<Bool>) {
 //        self._isUserCurrentryLoggedOut = isUserCurrentryLoggedOut
@@ -253,12 +252,12 @@ struct HomeView: View {
                 
                 // TODO: - 第二弾
                 // 送るボタン
-//                NavigationLink {
-//                    MoneyTransferView()
-//                } label: {
-//                    MenuButton(imageSystemName: "yensign.circle", text: "送る")
-//                }
-//                .foregroundColor(.white)
+                NavigationLink {
+                    MoneyTransferView()
+                } label: {
+                    MenuButton(imageSystemName: "yensign.circle", text: "送る")
+                }
+                .foregroundColor(.white)
                 
                 // ランキングボタン
                 NavigationLink {
@@ -384,6 +383,7 @@ struct HomeView: View {
                     
                     // 未読があった場合
                     if !notification.isRead {
+                        
                         isContainNotReadNotification = true
                     }
                 })

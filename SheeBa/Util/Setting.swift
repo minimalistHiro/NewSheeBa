@@ -30,4 +30,5 @@ final class Setting {
 
 final class UserSetting: ObservableObject {
     @AppStorage("isShowPoint") var isShowPoint = true           // ポイントを表示する
+    @AppStorage("badgeCount") var badgeCount = 0                // 通知バッジ数
 }

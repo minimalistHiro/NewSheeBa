@@ -9,10 +9,13 @@ import SwiftUI
 
 struct RankingView: View {
     
+    @Environment(\.dismiss) var dismiss
     @ObservedObject var vm = ViewModel()
     @State private var users = [ChatUser]()             // 全ユーザー
     @State private var rankMoneyUsers = [ChatUser]()    // ランキング表示ユーザー
     @State private var ranking = Setting.rankingCount   // ランキング数
+    @State private var isShowResetPointAlert = false    // 全ユーザーポイントリセットアラート表示有無
+    @State private var isShowSuccessResetPoint = false  // 全ユーザーポイントリセット成功アラート表示有無
     let currentUser: ChatUser?                          // 現在のユーザー
     
     var body: some View {
@@ -22,14 +25,27 @@ struct RankingView: View {
                     ForEach(rankMoneyUsers, id: \.self) { user in
                         CardView(user: user)
                     }
+                    
+                    // 全ユーザーリセットボタン
+                    if let currentUser = vm.currentUser, currentUser.isOwner {
+                        Button {
+                            isShowResetPointAlert = true
+                        } label: {
+                            Text("全ユーザーのポイントをリセットする")
+                                .foregroundStyle(Color.red)
+                        }
+                    }
                 }
                 .padding(.bottom, 20)
             }
         }
         .navigationTitle("ランキング")
+        .overlay {
+            ScaleEffectIndicator(onIndicator: $vm.onIndicator)
+        }
         .onAppear {
             if FirebaseManager.shared.auth.currentUser?.uid != nil {
-//                vm.fetchCurrentUser()
+                vm.fetchCurrentUser()
                 fetchAllUsersOrderByMoney()
             }
         }
@@ -38,6 +54,21 @@ struct RankingView: View {
                        isShowAlert: $vm.isShowError,
                        message: vm.alertMessage,
                        didAction: { vm.isShowError = false })
+        .asDestructiveAlert(title: "全ユーザーのポイントをリセットしますか？",
+                            isShowAlert: $isShowResetPointAlert,
+                            message: "一度この操作をすると、後で取り戻すことができません。",
+                            buttonText: "リセット",
+                            didAction: {
+            resetAllUserPoints()
+            isShowSuccessResetPoint = true
+        })
+        .asSingleAlert(title: "",
+                       isShowAlert: $isShowSuccessResetPoint,
+                       message: "リセットが完了しました。",
+                       didAction: {
+            isShowSuccessResetPoint = false
+            dismiss()
+        })
     }
     
     // MARK: - cardView
@@ -161,6 +192,24 @@ struct RankingView: View {
                     }
                 }
         }
+    }
+    
+    // MARK: - 全ユーザーのポイントをリセット
+    /// - Parameters: なし
+    /// - Returns: なし
+    private func resetAllUserPoints() {
+        vm.onIndicator = true
+        
+        let data = [FirebaseConstants.money: "0",]
+        
+        for user in users {
+            // 店舗アカウント、オーナーアカウント以外の全ユーザーの更新をする。
+            if !user.isStore && !user.isOwner {
+                vm.updateUser(document: user.uid, data: data)
+            }
+        }
+        
+        vm.onIndicator = false
     }
 }
 
