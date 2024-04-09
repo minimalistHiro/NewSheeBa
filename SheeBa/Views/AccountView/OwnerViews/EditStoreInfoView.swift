@@ -105,7 +105,7 @@ struct EditStoreInfoView: View {
         vm.onIndicator = true
         var data: [String: Any] = [:]
         
-        if let image = uiImage {
+        if uiImage != nil {
             data = [
                 FirebaseConstants.profileImageUrl: imageUrl?.absoluteString ?? "",
                 FirebaseConstants.isEnableScan: isEnableScan,

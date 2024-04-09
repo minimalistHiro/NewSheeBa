@@ -11,6 +11,8 @@ struct StoreInfoListView: View {
     
     @ObservedObject var vm = ViewModel()
     @State private var storeUsers = [ChatUser]()                // 全店舗ユーザー
+    @State private var isShowUpdateStoreCategory = false        // 指定の項目を追加するアラートの表示有無
+    @State private var isShowSuccessUpdateStoreCategory = false // 指定の項目の追加完了アラートの表示有無
 //    @State private var editUser: ChatUser?                      // 編集するユーザー
 //    @State private var isEnableScan = false                     // スキャンの可否
 //    @State private var isShowChangeIsEnableScanAlert = false    // スキャンの可否変更確認アラート
@@ -35,6 +37,14 @@ struct StoreInfoListView: View {
                                 .padding(.trailing)
                         }
                     }
+                    
+                }
+                
+                Button {
+                    isShowUpdateStoreCategory = true
+                } label: {
+                    Text("指定の項目を追加する（Developer専用）")
+                        .foregroundStyle(Color.red)
                 }
             }
             .padding(.leading, 10)
@@ -59,11 +69,22 @@ struct StoreInfoListView: View {
 //                updateStoreUserIsEnableScan(user: user)
 //            }
 //            isShowChangeIsEnableScanAlert = false
-//        })
+        //        })
         .asSingleAlert(title: "",
                        isShowAlert: $vm.isShowError,
                        message: vm.errorMessage,
                        didAction: { vm.isShowError = false })
+        .asDestructiveAlert(title: "",
+                            isShowAlert: $isShowUpdateStoreCategory,
+                            message: "指定の項目を追加してもよろしいですか？",
+                            buttonText: "追加",
+                            didAction: {
+            updateStoreUserCategory()
+        })
+        .asSingleAlert(title: "",
+                       isShowAlert: $isShowSuccessUpdateStoreCategory,
+                       message: "追加が完了しました。",
+                       didAction: { isShowSuccessUpdateStoreCategory = false })
     }
     
     // MARK: - 全店舗ユーザーを取得
@@ -95,20 +116,24 @@ struct StoreInfoListView: View {
             }
     }
     
-    // MARK: - 店舗ユーザーの
+    // MARK: - 店舗ユーザーの項目を追加する
     /// - Parameters: なし
     /// - Returns: なし
-//    private func updateStoreUserIsEnableScan(user: ChatUser) {
-//        vm.onIndicator = true
-//        
-//        let data = [FirebaseConstants.isEnableScan: isEnableScan,]
-//        // ユーザー情報を更新
-//        vm.updateUser(document: user.uid, data: data)
-//        
-//        fetchAllStoreUsers()
-//        
-//        vm.onIndicator = false
-//    }
+    private func updateStoreUserCategory() {
+        vm.onIndicator = true
+        
+        // 追加したい項目に変更すること
+        let data = ["":"",]
+        
+        // ユーザー情報を更新
+        for storeUser in storeUsers {
+            vm.updateUser(document: storeUser.uid, data: data)
+        }
+        
+        vm.onIndicator = false
+        isShowUpdateStoreCategory = false
+        isShowSuccessUpdateStoreCategory = true
+    }
 }
 
 #Preview {

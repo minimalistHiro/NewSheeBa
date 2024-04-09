@@ -74,7 +74,7 @@ struct Icon {
         
         var body: some View {
             Circle()
-                .stroke(.black , lineWidth: imageSize.lineWidth)
+                .stroke(.black, lineWidth: imageSize.lineWidth)
                 .frame(width: imageSize.frameSize, height: imageSize.frameSize)
                 .overlay {
                     Circle()

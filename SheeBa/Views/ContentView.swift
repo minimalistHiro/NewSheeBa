@@ -38,14 +38,14 @@ struct ContentView: View {
                         Label("ホーム", systemImage: "house")
                     }
                     .tag(1)
-                MapView(latitude: 200.0, longitude: 200.0)
+                MapView()
                     .tabItem {
                         Label("マップ", systemImage: "map")
                     }
                     .tag(2)
                 CameraView(isUserCurrentryLoggedOut: $isUserCurrentryLoggedOut)
                     .tag(3)
-                MapView(latitude: 200.0, longitude: 200.0)
+                MapView()
                     .tabItem {
                         Label("マップ", systemImage: "map")
                     }

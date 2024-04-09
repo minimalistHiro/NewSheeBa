@@ -101,7 +101,7 @@ struct SendPayView: View {
                 .padding(.bottom, 30)
                 .asCloseButton()
             }
-            .background(Color(String.yellow))
+//            .background(Color(String.yellow))
         }
         .onAppear {
             vm.fetchFriends()

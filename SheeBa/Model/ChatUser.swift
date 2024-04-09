@@ -27,6 +27,12 @@ struct ChatUser: Hashable, Identifiable {
     let no: Int
     let isEnableScan: Bool
     let getPoint: Int
+    let pointX: String
+    let pointY: String
+    let genre: String
+    let phoneNumber: String
+    let webURL: String
+    let movieURL: String
     
     // DBに保存しないデータ
     let ranking: String
@@ -48,6 +54,12 @@ struct ChatUser: Hashable, Identifiable {
         self.ranking = data[FirebaseConstants.rankign] as? String ?? ""
         self.isEnableScan = data[FirebaseConstants.isEnableScan] as? Bool ?? false
         self.getPoint = data[FirebaseConstants.getPoint] as? Int ?? 0
+        self.pointX = data[FirebaseConstants.pointX] as? String ?? ""
+        self.pointY = data[FirebaseConstants.pointY] as? String ?? ""
+        self.genre = data[FirebaseConstants.genre] as? String ?? ""
+        self.phoneNumber = data[FirebaseConstants.phoneNumber] as? String ?? ""
+        self.webURL = data[FirebaseConstants.webURL] as? String ?? ""
+        self.movieURL = data[FirebaseConstants.movieURL] as? String ?? ""
     }
 }
 

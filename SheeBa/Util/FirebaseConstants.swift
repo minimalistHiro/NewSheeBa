@@ -24,6 +24,12 @@ struct FirebaseConstants {
     static let os = "os"
     static let no = "no"
     static let isEnableScan = "isEnableScan"
+    static let pointX = "pointX"
+    static let pointY = "pointY"
+    static let genre = "genre"
+    static let phoneNumber = "phoneNumber"
+    static let webURL = "webURL"
+    static let movieURL = "movieURL"
     
     // messages
     static let messages = "messages"
