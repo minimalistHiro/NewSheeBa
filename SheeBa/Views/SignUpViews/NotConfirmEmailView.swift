@@ -83,7 +83,7 @@ struct NotConfirmEmailView: View {
             .navigationDestination(isPresented: $vm.isNavigateConfirmEmailView) {
                 ConfirmEmailView(email: $email, password: $password, didCompleteLoginProcess: didCompleteLoginProcess)
             }
-            .background(Color(String.yellow))
+            .background(Color.sheebaYellow)
         }
         .asSingleAlert(title: "",
                        isShowAlert: $vm.isShowError,

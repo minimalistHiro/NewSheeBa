@@ -41,7 +41,7 @@ struct MessageView {
                 .foregroundColor(.white)
                 .padding(.horizontal, Size.sendPayPaddingHorizontal)
                 .padding(.vertical, Size.sendPayPaddingVertical)
-                .background(Color.blue)
+                .background(Color.sheebaDarkGreen)
                 .clipShape(RoundedRectangle(cornerRadius: Size.cornerRadius))
             }
         }
@@ -82,7 +82,7 @@ struct MessageView {
                 .foregroundColor(.black)
                 .padding(.horizontal, Size.sendPayPaddingHorizontal)
                 .padding(.vertical, Size.sendPayPaddingVertical)
-                .background(Color(String.chatLogBackground))
+                .background(Color.sheebaYellow)
                 .clipShape(RoundedRectangle(cornerRadius: Size.cornerRadius))
                 Spacer()
             }
@@ -100,7 +100,7 @@ struct MessageView {
                         .foregroundColor(.white)
                 }
                 .padding()
-                .background(Color.blue)
+                .background(Color.sheebaDarkGreen)
                 .clipShape(RoundedRectangle(cornerRadius: Size.cornerRadius))
             }
         }
@@ -129,7 +129,7 @@ struct MessageView {
                         .foregroundColor(.black)
                 }
                 .padding()
-                .background(Color(String.chatLogBackground))
+                .background(Color.sheebaYellow)
                 .clipShape(RoundedRectangle(cornerRadius: Size.cornerRadius))
                 Spacer()
             }

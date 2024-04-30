@@ -21,7 +21,7 @@ struct EntryView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(String.yellow).ignoresSafeArea(edges: .all)
+                Color.sheebaYellow.ignoresSafeArea(edges: .all)
                 
                 VStack {
                     Spacer()

@@ -75,7 +75,7 @@ struct CreateAdvertisementView: View {
                                 .overlay {
                                     RoundedRectangle(cornerSize: CGSize(width: imageCornerSize, height: imageCornerSize))
                                         .frame(width: imageFrameWidth - 3, height: imageFrameHeight - 3)
-                                        .foregroundStyle(Color(String.chatLogBackground))
+                                        .foregroundStyle(Color.chatLogBackground)
                                 }
                                 .overlay {
                                     Text("画像を選択してください。")
@@ -108,7 +108,7 @@ struct CreateAdvertisementView: View {
             .overlay {
                 ScaleEffectIndicator(onIndicator: $vm.onIndicator)
             }
-            .background(Color(String.yellow))
+            .background(Color.sheebaYellow)
         }
         .navigationTitle("お知らせを作成")
         .navigationBarTitleDisplayMode(.inline)

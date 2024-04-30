@@ -79,7 +79,7 @@ struct Icon {
                 .overlay {
                     Circle()
                         .frame(width: imageSize.frameSize - imageSize.lineWidth, height: imageSize.frameSize - imageSize.lineWidth)
-                        .foregroundStyle(Color(String.chatLogBackground))
+                        .foregroundStyle(Color.chatLogBackground)
                 }
                 .overlay {
                     Image(systemName: "person.fill")

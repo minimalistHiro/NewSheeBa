@@ -135,7 +135,7 @@ struct MapView: View {
                         }
                 }
             }
-            .padding(.bottom)
+            .padding(.bottom, 20)
         }
         .onAppear {
             setRegion(coordinate: CLLocationCoordinate2D(latitude: 35.83306, longitude: 139.69230))
@@ -177,8 +177,8 @@ struct MapView: View {
                     let data = snapshot.data()
                     let user = ChatUser(data: data)
                     
-                    // 追加するユーザーが店舗の場合のみ追加する。
-                    if user.isStore {
+                    // 追加するユーザーが店舗で且つ、SheeBa対応店舗の場合のみ追加する。
+                    if user.isStore, user.isEnableScan{
                         storeUsers.append(.init(data: data))
                     }
                 })

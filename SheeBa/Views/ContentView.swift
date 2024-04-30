@@ -84,7 +84,7 @@ struct ContentView: View {
                 }
             }
         }
-        .tint(Color(String.darkGreen))
+        .tint(Color.sheebaDarkGreen)
     }
 }
 

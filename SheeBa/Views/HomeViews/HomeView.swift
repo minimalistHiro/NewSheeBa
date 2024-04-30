@@ -173,7 +173,7 @@ struct HomeView: View {
     // MARK: - cardView
     private var cardView: some View {
         Rectangle()
-            .foregroundColor(Color(String.yellow))
+            .foregroundColor(Color.sheebaYellow)
             .frame(width: 300, height: 200)
             .cornerRadius(20)
             .shadow(radius: 7, x: 0, y: 0)
@@ -236,19 +236,19 @@ struct HomeView: View {
             Rectangle()
                 .cornerRadius(20)
                 .padding(.horizontal, 20)
-                .foregroundColor(Color(String.darkGreen))
+                .foregroundColor(Color.sheebaDarkGreen)
                 .frame(width: UIScreen.main.bounds.width, height: 70)
             
             HStack {
                 // QRコードボタン
-                if let currentUser = vm.currentUser, currentUser.isOwner {
+//                if let currentUser = vm.currentUser, currentUser.isOwner {
                     NavigationLink {
                         QRCodeView()
                     } label: {
                         MenuButton(imageSystemName: "qrcode", text: "QRコード")
                     }
                     .foregroundColor(.white)
-                }
+//                }
                 
                 // TODO: - 第二弾
                 // 送るボタン
@@ -279,49 +279,49 @@ struct HomeView: View {
     }
     
     // MARK: - advertisements
-    private var advertisements: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-                ForEach(vm.advertisements, id: \.self) { advertisement in
-                    NavigationLink {
-                        AdvertisementDetailView(advertisement: advertisement)
-                    } label: {
-                        if advertisement.imageUrl != "" {
-                            WebImage(url: URL(string: advertisement.imageUrl))
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 150, height: 150)
-                                .clipShape(RoundedRectangle(cornerSize: CGSize(width: 7, height: 7)))
-                        } else {
-                            RoundedRectangle(cornerSize: CGSize(width: 7, height: 7))
-                                .frame(width: 150, height: 150)
-                                .foregroundStyle(Color(String.chatLogBackground))
-                                .overlay {
-                                    Image(systemName: "photo")
-                                        .font(.system(size: 30))
-                                        .foregroundColor(.black)
-                                }
-                        }
-                    }
-                }
-                if let currentUser = vm.currentUser, currentUser.isOwner {
-                    NavigationLink {
-                        CreateAdvertisementView()
-                    } label: {
-                        RoundedRectangle(cornerSize: CGSize(width: 7, height: 7))
-                            .frame(width: 150, height: 150)
-                            .foregroundStyle(Color.white)
-                            .overlay {
-                                Image(systemName: "plus")
-                                    .font(.system(size: 30))
-                                    .bold()
-                            }
-                    }
-                }
-            }
-        }
-        .padding()
-    }
+//    private var advertisements: some View {
+//        ScrollView(.horizontal, showsIndicators: false) {
+//            HStack {
+//                ForEach(vm.advertisements, id: \.self) { advertisement in
+//                    NavigationLink {
+//                        AdvertisementDetailView(advertisement: advertisement)
+//                    } label: {
+//                        if advertisement.imageUrl != "" {
+//                            WebImage(url: URL(string: advertisement.imageUrl))
+//                                .resizable()
+//                                .scaledToFill()
+//                                .frame(width: 150, height: 150)
+//                                .clipShape(RoundedRectangle(cornerSize: CGSize(width: 7, height: 7)))
+//                        } else {
+//                            RoundedRectangle(cornerSize: CGSize(width: 7, height: 7))
+//                                .frame(width: 150, height: 150)
+//                                .foregroundStyle(Color(String.chatLogBackground))
+//                                .overlay {
+//                                    Image(systemName: "photo")
+//                                        .font(.system(size: 30))
+//                                        .foregroundColor(.black)
+//                                }
+//                        }
+//                    }
+//                }
+//                if let currentUser = vm.currentUser, currentUser.isOwner {
+//                    NavigationLink {
+//                        CreateAdvertisementView()
+//                    } label: {
+//                        RoundedRectangle(cornerSize: CGSize(width: 7, height: 7))
+//                            .frame(width: 150, height: 150)
+//                            .foregroundStyle(Color.white)
+//                            .overlay {
+//                                Image(systemName: "plus")
+//                                    .font(.system(size: 30))
+//                                    .bold()
+//                            }
+//                    }
+//                }
+//            }
+//        }
+//        .padding()
+//    }
     
     // MARK: - qrCodeButton
     private var qrCodeButton: some View {

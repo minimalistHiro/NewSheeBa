@@ -56,11 +56,13 @@ struct StoreDetailView: View {
                     
                     Spacer()
                     
-                    Button {
-                        
-                    } label: {
-                        Text(store?.phoneNumber ?? "-")
-                            .foregroundStyle(store?.phoneNumber == "-" ? Color.black : Color.blue)
+                    if let phoneNumber = store?.phoneNumber, phoneNumber != "" {
+                        Button {
+                            UIApplication.shared.open(URL(string: "tel://" + phoneNumber)!)
+                        } label: {
+                            Text(phoneNumber)
+                                .foregroundStyle(Color.blue)
+                        }
                     }
                 }
                 
@@ -71,11 +73,13 @@ struct StoreDetailView: View {
                     
                     Spacer()
                     
-                    Button {
-                        
-                    } label: {
-                        Text(store?.webURL ?? "-")
-                            .foregroundStyle(store?.webURL == "-" ? Color.black : Color.blue)
+                    if let webURL = store?.webURL, webURL != "" {
+                        Button {
+                            UIApplication.shared.open(URL(string: webURL)!)
+                        } label: {
+                            Text(webURL)
+                                .foregroundStyle(Color.blue)
+                        }
                     }
                 }
                 
@@ -86,15 +90,17 @@ struct StoreDetailView: View {
                     
                     Spacer()
                     
-                    Button {
-                        
-                    } label: {
-                        Text(store?.movieURL ?? "-")
-                            .foregroundStyle(store?.movieURL == "-" ? Color.black : Color.blue)
+                    if let movieURL = store?.movieURL, movieURL != "" {
+                        Button {
+                            UIApplication.shared.open(URL(string: movieURL)!)
+                        } label: {
+                            Text(movieURL)
+                                .foregroundStyle(Color.blue)
+                        }
                     }
                 }
             }
-            .padding(.leading, 10)
+            .padding(.horizontal, 7)
             .listStyle(.inset)
             .environment(\.defaultMinListRowHeight, 60)
         }

@@ -50,7 +50,7 @@ struct CreateNewMessageView: View {
             vm.fetchFriends()
             vm.fetchAllUsersOtherThanSelf()
         }
-        .searchable(text: $searchText)
+        .searchable(text: $searchText, prompt: "ユーザー名を入力してください")
         .onSubmit(of: .search) {
             fetchSearchNames()
         }

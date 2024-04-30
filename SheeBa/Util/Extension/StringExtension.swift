@@ -10,13 +10,13 @@ import Foundation
 extension String {
     
     // Colors
-    static let highlight = "Highlight"
-    static let caution = "Caution"
-    static let chatLogBackground = "ChatLogBackground"
-    static let yellow = "Yellow"
-    static let green = "Green"
-    static let darkGreen = "DarkGreen"
-    static let brown = "Brown"
+//    static let highlight = "Highlight"
+//    static let caution = "Caution"
+//    static let chatLogBackground = "ChatLogBackground"
+//    static let yellow = "Yellow"
+//    static let green = "Green"
+//    static let darkGreen = "DarkGreen"
+//    static let brown = "Brown"
     
     // Image
     static let title = "Title"

@@ -50,7 +50,7 @@ struct UpdateUsernameView: View {
             .onTapGesture {
                 focus = false
             }
-            .background(Color(String.yellow))
+            .background(Color.sheebaYellow)
             .overlay {
                 ScaleEffectIndicator(onIndicator: $vm.onIndicator)
             }

@@ -48,6 +48,7 @@ struct MoneyTransferView: View {
             if FirebaseManager.shared.auth.currentUser?.uid != nil {
                 vm.fetchCurrentUser()
                 vm.fetchRecentMessages()
+                vm.fetchFriends()
             }
         }
         .onChange(of: tab) { value in
@@ -177,7 +178,7 @@ struct MoneyTransferView: View {
         var imageSystemName: String {
             switch buttonTab {
             case .history:
-                "clock.arrow.circlepath"
+                "message"
             case .friend:
                 "person.2"
             }
@@ -284,16 +285,10 @@ struct MoneyTransferView: View {
             Button {
                 shouldShowNewMessageScreen.toggle()
             } label: {
-                Circle()
-                    .foregroundColor(.black)
-                    .frame(width: 60)
-                    .overlay {
-                        Image(systemName: "person.fill.badge.plus")
-                            .resizable()
-                            .scaledToFit()
-                            .foregroundColor(.white)
-                            .frame(width: 30)
-                    }
+                CustomCapsule(text: "新規友達を検索",
+                              imageSystemName: "person.fill.badge.plus",
+                              foregroundColor: .blue,
+                              textColor: .white, isStroke: false)
             }
             .padding(.bottom)
         }

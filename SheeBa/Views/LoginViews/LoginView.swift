@@ -77,7 +77,7 @@ struct LoginView: View {
             .navigationDestination(isPresented: $isNavigateSendEmailView) {
                 SendEmailView(didCompleteLoginProcess: didCompleteLoginProcess)
             }
-            .background(Color(String.yellow))
+            .background(Color.sheebaYellow)
         }
         .asBackButton()
         .asSingleAlert(title: "",

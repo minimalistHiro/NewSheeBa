@@ -41,7 +41,7 @@ struct AccountView: View {
                 Spacer()
                 
                 Rectangle()
-                    .foregroundColor(Color(String.yellow))
+                    .foregroundColor(Color.sheebaYellow)
                     .frame(width: 300, height: 200)
                     .cornerRadius(20)
                     .shadow(radius: 7, x: 0, y: 0)

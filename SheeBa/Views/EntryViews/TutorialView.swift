@@ -21,7 +21,7 @@ struct TutorialView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(String.yellow).ignoresSafeArea(edges: .all)
+                Color.sheebaYellow.ignoresSafeArea(edges: .all)
                 
                 TabView(selection: $selectedTab) {
                     ForEach(pages, id: \.self) { page in
@@ -219,7 +219,7 @@ struct Tutorial: View {
         }
         .frame(height: CGFloat(UIScreen.main.bounds.height / 2))
         .padding()
-        .background(Color(String.chatLogBackground))
+        .background(Color.chatLogBackground)
     }
 }
 

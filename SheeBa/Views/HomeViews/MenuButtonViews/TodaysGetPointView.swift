@@ -21,7 +21,7 @@ struct TodaysGetPointView: View {
                         .cornerRadius(20)
                         .padding(.horizontal, 30)
                         .frame(width: UIScreen.main.bounds.width, height: 150)
-                        .foregroundStyle(Color(String.darkGreen))
+                        .foregroundStyle(Color.sheebaDarkGreen)
                         .overlay {
                             VStack {
                                 Text("本日")
@@ -68,62 +68,66 @@ struct TodaysGetPointView: View {
         let isGetPoint: Bool
         
         var body: some View {
-            ZStack {
-                Rectangle()
-                    .cornerRadius(20)
-                    .padding(.horizontal, 30)
-                    .frame(width: UIScreen.main.bounds.width, height: 100)
-                    .foregroundStyle(Color.white)
-                    .shadow(radius: 7, x: 0, y: 0)
-                    .overlay {
-                        VStack {
-                            Spacer()
-                            
-                            HStack {
+            NavigationLink {
+                StoreDetailView(store: user)
+            } label: {
+                ZStack {
+                    Rectangle()
+                        .cornerRadius(20)
+                        .padding(.horizontal, 30)
+                        .frame(width: UIScreen.main.bounds.width, height: 100)
+                        .foregroundStyle(Color.white)
+                        .shadow(radius: 7, x: 0, y: 0)
+                        .overlay {
+                            VStack {
                                 Spacer()
                                 
-                                if isGetPoint {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 25)
-                                        .padding(.trailing, 10)
-                                        .foregroundStyle(Color.blue)
-                                } else {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 25)
-                                        .padding(.trailing, 10)
-                                        .foregroundStyle(Color.white)
+                                HStack {
+                                    Spacer()
+                                    
+                                    if isGetPoint {
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 25)
+                                            .padding(.trailing, 10)
+                                            .foregroundStyle(Color.blue)
+                                    } else {
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 25)
+                                            .padding(.trailing, 10)
+                                            .foregroundStyle(Color.white)
+                                    }
+                                    
+                                    // トップ画像
+                                    if user.profileImageUrl != "" {
+                                        Icon.CustomWebImage(imageSize: .medium, image: user.profileImageUrl)
+                                            .opacity(isGetPoint ? 1 : 0.4)
+                                    } else {
+                                        Icon.CustomCircle(imageSize: .medium)
+                                            .opacity(isGetPoint ? 1 : 0.4)
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    Text(user.username)
+                                        .font(.title3)
+                                        .bold()
+                                        .dynamicTypeSize(.medium)
+                                        .foregroundStyle(isGetPoint ? .black : .gray)
+                                        .frame(width: 150)
+                                        .padding(.bottom, 5)
+                                    
+                                    Spacer()
                                 }
-                                
-                                // トップ画像
-                                if user.profileImageUrl != "" {
-                                    Icon.CustomWebImage(imageSize: .medium, image: user.profileImageUrl)
-                                        .opacity(isGetPoint ? 1 : 0.4)
-                                } else {
-                                    Icon.CustomCircle(imageSize: .medium)
-                                        .opacity(isGetPoint ? 1 : 0.4)
-                                }
-                                
-                                Spacer()
-                                
-                                Text(user.username)
-                                    .font(.title3)
-                                    .bold()
-                                    .dynamicTypeSize(.medium)
-                                    .foregroundStyle(isGetPoint ? .black : .gray)
-                                    .frame(width: 150)
-                                    .padding(.bottom, 5)
                                 
                                 Spacer()
                             }
-                            
-                            Spacer()
                         }
-                    }
-                    .padding(.top, 15)
+                        .padding(.top, 15)
+                }
             }
         }
     }
@@ -165,6 +169,8 @@ struct TodaysGetPointView: View {
     /// - Parameters: なし
     /// - Returns: なし
     private func fetchAllStoreUsers() {
+        storeUsers.removeAll()
+        
         FirebaseManager.shared.firestore
             .collection(FirebaseConstants.users)
             .getDocuments { documentsSnapshot, error in
@@ -177,7 +183,7 @@ struct TodaysGetPointView: View {
                     let data = snapshot.data()
                     let user = ChatUser(data: data)
                     
-                    // 追加するユーザーが店舗の場合のみ追加する。
+                    // 追加するユーザーが店舗で且つ、SheeBa対応店舗の場合のみ追加する。
                     if user.isStore, user.isEnableScan {
                         storeUsers.append(.init(data: data))
                     }

@@ -57,7 +57,7 @@ struct SendEmailView: View {
             .overlay {
                 ScaleEffectIndicator(onIndicator: $vm.onIndicator)
             }
-            .background(Color(String.yellow))
+            .background(Color.sheebaYellow)
         }
         .asBackButton()
         .asSingleAlert(title: "",

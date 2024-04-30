@@ -36,15 +36,11 @@ struct ChatLogView: View {
                 }
                 chatButtonBar
             }
-            .background(.white)
+            .background(Color.chatLogBar)
             .fullScreenCover(isPresented: $isShowSendPayScreen) {
                 SendPayView(didCompleteSendPayProcess: { sendPayText in
                     isShowSendPayScreen.toggle()
-//                    isSendPay = true
-//                    self.sendPayText = sendPayText
-//                    lastText = "\(sendPayText)"
                     vm.handleSend(toId: chatUserUID, chatText: "", lastText: sendPayText, isSendPay: true)
-//                    isSendPay = false
                 }, chatUser: vm.chatUser)
             }
             .navigationTitle(vm.chatUser?.username.prefix(20) ?? "")
@@ -118,7 +114,7 @@ struct ChatLogView: View {
                     isShowSendPayScreen.toggle()
                 } label: {
                     Capsule()
-                        .foregroundStyle(.green)
+                        .foregroundStyle(.blue)
                         .frame(width: 60, height: 35)
                         .overlay {
                             HStack(spacing: 0) {
@@ -167,7 +163,7 @@ struct ChatLogView: View {
         }
         .padding(.horizontal)
         .padding(.vertical, 8)
-        .background(Color.chatLogBar)
+        .background(Color.chatLogBackground)
     }
 }
 
